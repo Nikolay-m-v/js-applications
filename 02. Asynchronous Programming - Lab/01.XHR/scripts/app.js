@@ -1,14 +1,12 @@
 "use strict";
 
-function loadRepos(username, repositoryName) {
+function loadRepos() {
   let xhr = new XMLHttpRequest();
 
   let url = `https://api.github.com/users/testnakov/repos`;
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      let repositoryData = JSON.parse(xhr.responseText);
-
       document.getElementById("res").textContent = xhr.responseText;
     }
   };
