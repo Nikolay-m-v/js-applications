@@ -3,8 +3,17 @@ body {
 }
 
 .main-wrapper {
-  width: 800px;
+  width: 1000px;
   height: 800px;
   background-color: white;
   margin: 0 auto;
+}
+
+.li-holder {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
+
+.input-fields {
 }
