@@ -2,34 +2,64 @@
 
 (function main() {
   function takeInputValues(elements) {
-    const nameInput = elements.assetName.value;
-    const quantityInput = elements.assetQuantity.value;
-    const dateBoughtInput = elements.assetDateBought.value;
-    const priceBoughtInput = elements.assetPriceBought.value;
-    const currentPriceInput = elements.assetCurrentPrice.value;
+    const inputValues = {
+      nameInput: elements.assetName.value,
+      quantityInput: elements.assetQuantity.value,
+      dateBoughtInput: elements.assetDateBought.value,
+      priceBoughtInput: elements.assetPriceBought.value,
+      currentPriceInput: elements.assetCurrentPrice.value,
+    };
 
-    createElements(inputValues);
+    if (!checkInputValues(inputValues)) {
+      return;
+    }
+
+    return inputValues;
+  }
+
+  function checkInputValues(inputValues) {
+    if (
+      inputValues.nameInput === "" ||
+      inputValues.quantityInput === "" ||
+      inputValues.dateBoughtInput === "" ||
+      inputValues.priceBoughtInput === "" ||
+      inputValues.currentPriceInput === ""
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  function createElements(elements) {
+    const liElName = document.createElement("li");
+    liElName.textContent = elements.nameInput;
+    console.log(liElName);
+    const liElQuantity = document.createElement("li");
+    const liElDateBought = document.createElement("li");
+    const liElPriceBought = document.createElement("li");
+    const liElCurrentPrice = document.createElement("li");
 
     return {
-      nameInput,
-      quantityInput,
-      dateBoughtInput,
-      priceBoughtInput,
-      currentPriceInput,
+      liElName,
+      liElQuantity,
+      liElDateBought,
+      liElPriceBought,
+      liElCurrentPrice,
     };
   }
 
-  function createElements(inputValues) {
-    const liElName = document.createElement(li);
-    const liElQuantity = document.createElement(li);
-    const liElDateBought = document.createElement(li);
-    const liElPriceBought = document.createElement(li);
-    const liElCurrentPrice = document.createElement(li);
+  function appendElements(elements, inputValues) {
+    const elementsToAppend = createElements(inputValues);
+
+    elements.liHolder.appendChild(elementsToAppend.liElName);
   }
 
   function eventHandler(elements) {
     elements.addItem.addEventListener("click", () => {
-      takeInputValues(elements);
+      const inputValues = takeInputValues(elements);
+      if (inputValues) {
+        appendElements(elements, inputValues);
+      }
     });
   }
 
@@ -40,6 +70,7 @@
     const assetPriceBought = document.getElementById("assetPriceBought");
     const assetCurrentPrice = document.getElementById("assetCurrentPrice");
     const addItem = document.getElementById("addItem");
+    const liHolder = document.getElementById("liHolder");
 
     return {
       assetName,
@@ -48,6 +79,7 @@
       assetPriceBought,
       assetCurrentPrice,
       addItem,
+      liHolder,
     };
   }
 
