@@ -1,0 +1,10 @@
+body {
+  background-color: rgb(173, 232, 84);
+}
+
+.main-wrapper {
+  width: 800px;
+  height: 800px;
+  background-color: white;
+  margin: 0 auto;
+}
