@@ -13,7 +13,8 @@ body {
   display: flex;
   flex-flow: row;
   justify-content: space-around;
+  list-style: none;
 }
 
-.input-fields {
-}
+/* .input-fields {
+} */
