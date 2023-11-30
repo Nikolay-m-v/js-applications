@@ -84,5 +84,4 @@
   }
 
   eventHandler(gatherElements());
-  /// FIXES
 })();
