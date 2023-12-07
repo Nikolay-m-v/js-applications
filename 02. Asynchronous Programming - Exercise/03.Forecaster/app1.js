@@ -62,6 +62,36 @@ function solve() {
         console.error("Error fetching current conditions:", error.message);
       });
   }
+
+  function fetchUpcomingConditions(locationCode) {
+    const upcomingUrl = `http://localhost:3030/jsonstore/forecaster/upcoming/${locationCode}`;
+
+    fetchCurrentConditions(upcomingUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Error: ${response.status}  - ${response.statusText}`
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        divElemenetForecastUpcoming.innerHTML = `
+          <div class="label">Three-day forecast</div>
+        `;
+
+        data.forecast.forEach((forecast) => {
+          const forecastDiv = document.createElement("div");
+          forecastDiv.className = "forecast-info";
+          forecastDiv.innerHTML = `
+            <div class="condition">${forecast.condition}</div>
+            <div class="symbol">&#176;</div>
+            <div class="forecast-data">Low: ${forecast.low}° | High: ${forecast.high}°</div>
+          `;
+          divElemenetForecastUpcoming.appendChild(forecastDiv);
+        });
+      });
+  }
 }
 
 solve();
