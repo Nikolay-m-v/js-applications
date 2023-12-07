@@ -66,7 +66,7 @@ function solve() {
   function fetchUpcomingConditions(locationCode) {
     const upcomingUrl = `http://localhost:3030/jsonstore/forecaster/upcoming/${locationCode}`;
 
-    fetchCurrentConditions(upcomingUrl)
+    fetch(upcomingUrl)
       .then((response) => {
         if (!response.ok) {
           throw new Error(
