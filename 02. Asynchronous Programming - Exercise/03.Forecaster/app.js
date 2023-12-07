@@ -11,4 +11,3 @@ function solve() {
   const divElement = document.getElementById("forecast");
   const upcomingElement = document.getElementById("upcoming");
 }
-/// fix
