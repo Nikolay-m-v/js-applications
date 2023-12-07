@@ -8,7 +8,7 @@
 function solve() {
   const inputElement = document.getElementById("location").value;
   const submitBtn = document.getElementById("submit");
-  const divElement = document.getElementById("forecast");
+  const divDisplay = document.getElementById("forecast");
   const upcomingDayDiv = document.getElementById("upcoming");
   const currentDayDiv = document.getElementById("current");
   let baseUrl = "http://localhost:3030/jsonstore/forecaster";
@@ -25,5 +25,10 @@ function solve() {
   submitBtn.addEventListener("click", (e) => {
     divElementCurrent.innerHTML = "";
     divElementUpcoming.innerHTML = "";
+
+    divElementCurrent.setAttribute("class", "forecasts");
+    divElementUpcoming.setAttribute("class", "forecast-info");
+
+    divDisplay.style.display = "inline";
   });
 }
