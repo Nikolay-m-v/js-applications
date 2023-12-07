@@ -5,11 +5,11 @@ function solve() {
 
   const inputElement = document.getElementById("location");
   const submitBtn = document.getElementById("submit");
-  const divElemenetForecast = document.getElementById("forecast");
+  const divElementForecast = document.getElementById("forecast");
   const divElemenetForecastUpcoming = document.getElementById("upcoming");
   const divElemenetForecastCurrent = document.getElementById("current");
 
-  submitBtn.addEventListener("click", getLocation());
+  submitBtn.addEventListener("click", getLocation);
 
   function getLocation() {
     const locationValue = inputElement.value;
@@ -90,6 +90,9 @@ function solve() {
           `;
           divElemenetForecastUpcoming.appendChild(forecastDiv);
         });
+      })
+      .catch((error) => {
+        console.error("Error fetching upcoming forecast:".error.message);
       });
   }
 }
