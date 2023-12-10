@@ -98,3 +98,5 @@ function solve() {
 }
 
 solve();
+
+/// cb and ajax videos
