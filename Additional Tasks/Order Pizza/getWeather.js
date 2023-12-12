@@ -6,12 +6,12 @@ function getWeather() {
   });
 }
 
-const promise = getWeather();
-promise.then(
-  function (data) {
-    console.log(`first param ${data}`);
-  },
-  function (data) {
-    console.log(`second param ${data}`);
-  }
-);
+function onSuccess(data) {
+  console.log(`Success ${data}`);
+}
+
+function onReject(error) {
+  console.log(`Error:  ${error}`);
+}
+
+getWeather().then(onSuccess, onReject);
