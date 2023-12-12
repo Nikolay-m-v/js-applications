@@ -7,6 +7,11 @@ function getWeather() {
 }
 
 const promise = getWeather();
-promise.then(function (data) {
-  console.log(data);
-});
+promise.then(
+  function (data) {
+    console.log(`first param ${data}`);
+  },
+  function (data) {
+    console.log(`second param ${data}`);
+  }
+);
