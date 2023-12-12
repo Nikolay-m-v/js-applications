@@ -3,7 +3,7 @@
 function getWeather() {
   return new Promise(function (resolve, reject) {
     setTimeout(() => {
-      resolve("Sunny");
+      resolve("Cry");
     }, 200);
   });
 }
@@ -36,4 +36,4 @@ function onReject(error) {
   console.log(`Error:  ${error}`);
 }
 
-getWeather().then(onSuccess, onReject);
+getWeather().then(getWeatherIcon).then(onSuccess, onReject);
