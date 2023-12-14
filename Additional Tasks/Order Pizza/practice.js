@@ -25,3 +25,4 @@ function onError(errorCode) {
 }
 
 fun1().then(fun2).then(onSuccess).catch(onError);
+//// ajax videos
