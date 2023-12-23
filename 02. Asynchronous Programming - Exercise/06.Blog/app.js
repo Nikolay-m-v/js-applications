@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       const commentsData = await commentsResponse.json();
 
-      // Filter comments for the current post
+      // Filter comments for the current posts
       const postCommentsData = Object.values(commentsData).filter(
         (comment) => comment.postId === selectedPostId
       );
