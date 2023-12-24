@@ -3,7 +3,7 @@
 function solve() {
   const departBtn = document.getElementById("depart");
   const arriveBtn = document.getElementById("arrive");
-  const infoElement = document.getElementById("infoElement");
+  const infoElement = document.getElementById("info");
 
   let busStop = {
     next: "depot",
@@ -27,7 +27,9 @@ function solve() {
   }
 
   function arrive() {
+    infoElement.textContent = `Arriving at ${busStop.name}`;
     arriveBtn.disabled = true;
+    departBtn.disabled = false;
 
     fetch;
   }
