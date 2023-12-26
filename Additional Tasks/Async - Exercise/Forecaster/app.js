@@ -30,5 +30,14 @@ function solve() {
           return;
         }
       });
+
+    Promise.all([
+      fetch(
+        `http://localhost:3030/jsonstore/forecaster/today/${location.code}`
+      ).then((res) => res.json()),
+      fetch(
+        `http://localhost:3030/jsonstore/forecaster/upcoming/${location.code}`
+      ).then((res) => res.json()),
+    ]);
   }
 }
