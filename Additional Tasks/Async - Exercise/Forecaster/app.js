@@ -13,5 +13,22 @@ function solve() {
 
   function getWeather() {
     const locationName = locationElement.value();
+
+    if (!locationName) {
+      displayError();
+      return;
+    }
+
+    fetch(`http://localhost:3030/jsonstore/forecaster/locations`)
+      .then((response) => response.json())
+      .then((locationsData) => {
+        const location = locationsData.find(
+          (location) => location.name === locationName
+        );
+        if (!location) {
+          displayError();
+          return;
+        }
+      });
   }
 }
