@@ -7,24 +7,6 @@ const extraDivToShow = document.getElementsByClassName("extra")[0];
 let articleId = "replace_with_actual_id";
 let urlWithId = `http://localhost:3030/jsonstore/advanced/articles/details/${articleId}`;
 
-async function getArticleDetails() {
-  try {
-    let response = await fetch(urlWithId);
-
-    if (!response.ok) {
-      throw new Error("failed to fetch data");
-    }
-
-    const data = await response.json();
-    console.log(data);
-
-    const { id, title, content } = data;
-    articleId = data.id;
-  } catch (error) {
-    console.log("Error fetching data");
-  }
-}
-
 async function main() {
   let url = `http://localhost:3030/jsonstore/advanced/articles/list`;
   let response = await fetch(url);
@@ -35,6 +17,23 @@ async function main() {
 
   const data = await response.json();
   console.log(data);
+}
+
+async function getArticleDetails() {
+  try {
+    let response = await fetch(urlWithId);
+
+    if (!response.ok) {
+      throw new Error("failed to fetch data");
+    }
+
+    const data = await response.json();
+    const { id, title, content } = data;
+
+    console.log(data);
+  } catch (error) {
+    console.log("Error fetching data", error);
+  }
 }
 
 showMoreBtn.addEventListener("click", () => {
