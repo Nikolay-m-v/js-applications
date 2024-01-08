@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loadPostsBtn.addEventListener("click", loadPosts);
   viewPostBtn.addEventListener("click", viewPost);
 
+  // fx
+
   async function loadPosts() {
     try {
       const response = await fetch(
