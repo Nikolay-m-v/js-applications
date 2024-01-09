@@ -21,13 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Error fetching data");
       }
 
-      let data = response.json();
-      console.log(data);
+      const data = await response.json();
 
       postsDropdown.innerHTML = "";
 
       for (const postId in data) {
-        console.log(postId);
         const optionElement = document.createElement("option");
         optionElement.value = postId;
         optionElement.textContent = data[postId].title;
@@ -40,16 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function getCommentsData() {
     const selectedPostId = postsDropdown.value;
-    let commentsUrl = `http://localhost:3030/jsonstore/blog/comments${selectedPostId}`;
+    let commentsUrl = `http://localhost:3030/jsonstore/blog/posts/${selectedPostId}`;
 
     try {
-      let response = await fetch(commentsUrl);
+      const response = await fetch(commentsUrl);
 
       if (response.ok === false) {
         throw new Error("Error fetching data");
       }
 
-      let postData = response.json();
+      const postData = await response.json();
       postTitle.textContent = postData.title;
       postBody.textContent = postData.body;
 
