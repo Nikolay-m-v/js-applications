@@ -51,20 +51,20 @@ document.addEventListener("DOMContentLoaded", () => {
       postTitle.textContent = postData.title;
       postBody.textContent = postData.body;
 
-      let commentsResponse = await fetch(
+      const commentsResponse = await fetch(
         "http://localhost:3030/jsonstore/blog/comments"
       );
 
       const commentsData = await commentsResponse.json();
 
-      const postCommentsData = Object.values(commentsData).filter((comment) => {
-        comment.postId === selectedPostId;
-      });
+      const postCommentsData = Object.values(commentsData).filter(
+        (comment) => comment.postId === selectedPostId
+      );
 
       postComments.innerHTML = "";
 
       postCommentsData.forEach((comment) => {
-        let liElement = document.createElement("li");
+        const liElement = document.createElement("li");
         liElement.textContent = comment.text;
         postComments.appendChild(liElement);
       });
