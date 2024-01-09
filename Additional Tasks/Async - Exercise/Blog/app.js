@@ -1,7 +1,6 @@
 "use strict";
 
 let postsUrl = "http://localhost:3030/jsonstore/blog/posts";
-let commentsUrl = "http://localhost:3030/jsonstore/blog/comments";
 const btnLoadPosts = document.getElementById("btnLoadPosts");
 const postsDropdown = document.getElementById("posts");
 const btnViewPost = document.getElementById("btnViewPost");
@@ -31,12 +30,17 @@ async function getPostsData() {
 }
 
 async function getCommentsData() {
+  const selectedPostId = postsDropdown.value;
+  let commentsUrl = `http://localhost:3030/jsonstore/blog/comments${selectedPostId}`;
+
   try {
     let response = await fetch(commentsUrl);
 
     if (response.ok === false) {
       throw new Error("Error fetching data");
     }
+
+    let data = response.json();
   } catch (error) {
     console.log(error);
   }
