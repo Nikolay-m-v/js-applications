@@ -49,8 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("Error fetching data");
       }
 
-      let data = response.json();
-      console.log(data);
+      let postData = response.json();
+      postTitle.textContent = postData.title;
+      postBody.textContent = postData.body;
     } catch (error) {
       console.log(error);
     }
