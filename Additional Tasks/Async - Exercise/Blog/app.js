@@ -1,49 +1,59 @@
 "use strict";
 
-let postsUrl = "http://localhost:3030/jsonstore/blog/posts";
-const btnLoadPosts = document.getElementById("btnLoadPosts");
-const postsDropdown = document.getElementById("posts");
-const btnViewPost = document.getElementById("btnViewPost");
+document.addEventListener("DOMContentLoaded", () => {
+  const btnLoadPosts = document.getElementById("btnLoadPosts");
+  const btnViewPost = document.getElementById("btnViewPost");
+  const postsDropdown = document.getElementById("posts");
+  const postTitle = document.getElementById("post-title");
+  const postBody = document.getElementById("post-body");
+  const postComments = document.getElementById("post-comments");
 
-btnLoadPosts.addEventListener("click", getPostsData);
-btnViewPost.addEventListener("click", getCommentsData);
+  btnLoadPosts.addEventListener("click", getPostsData);
+  btnViewPost.addEventListener("click", getCommentsData);
 
-async function getPostsData() {
-  try {
-    let response = await fetch(postsUrl);
+  async function getPostsData() {
+    let postsUrl = "http://localhost:3030/jsonstore/blog/posts";
 
-    if (response.ok === false) {
-      throw new Error("Error fetching data");
+    try {
+      let response = await fetch(postsUrl);
+
+      if (response.ok === false) {
+        throw new Error("Error fetching data");
+      }
+
+      let data = response.json();
+      console.log(data);
+
+      postsDropdown.innerHTML = "";
+
+      for (const postId in data) {
+        console.log(postId);
+        const optionElement = document.createElement("option");
+        optionElement.value = postId;
+        optionElement.textContent = data[postId].title;
+        postsDropdown.appendChild(optionElement);
+      }
+    } catch (error) {
+      console.log(error);
     }
-
-    let data = response.json();
-
-    for (const postId in data) {
-      let optionElement = document.createElement("option");
-      optionElement.value = postId;
-      optionElement.textContent = data[postId].title;
-      postsDropdown.appendChild(optionElement);
-    }
-  } catch (error) {
-    console.log(error);
   }
-}
 
-async function getCommentsData() {
-  const selectedPostId = postsDropdown.value;
-  let commentsUrl = `http://localhost:3030/jsonstore/blog/comments${selectedPostId}`;
+  async function getCommentsData() {
+    const selectedPostId = postsDropdown.value;
+    let commentsUrl = `http://localhost:3030/jsonstore/blog/comments${selectedPostId}`;
 
-  try {
-    let response = await fetch(commentsUrl);
+    try {
+      let response = await fetch(commentsUrl);
 
-    if (response.ok === false) {
-      throw new Error("Error fetching data");
+      if (response.ok === false) {
+        throw new Error("Error fetching data");
+      }
+
+      let data = response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
     }
-
-    let data = response.json();
-  } catch (error) {
-    console.log(error);
   }
-}
-
-getPostsData();
+  getPostsData();
+});
