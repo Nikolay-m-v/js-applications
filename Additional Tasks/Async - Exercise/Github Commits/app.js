@@ -2,6 +2,7 @@
 
 const gitHubUsername = document.getElementById("username");
 const repo = document.getElementById("repo");
+const list = document.getElementById("commits");
 
 async function loadCommits() {
   try {
@@ -13,6 +14,12 @@ async function loadCommits() {
     }
 
     const commits = await response.json();
+
+    list.innerHTML = "";
+
+    for (let { commit } of commits) {
+      list.innerHTML += `<li>${commit.author.name}${commit.message}</li>`;
+    }
 
     console.log("Commits", commits);
   } catch (error) {
