@@ -18,15 +18,6 @@
 // 4.
 
 (async function () {
-  async function getArticles() {
-    const url = `http://localhost:3030/jsonstore/advanced/articles/list`;
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    return data;
-  }
-
   function renderToggleArticleButton(article, articleContent) {
     const toggleButton = document.createElement("button");
 
@@ -64,6 +55,7 @@
 
     divAccordionElement.appendChild(divHeadElement);
     divAccordionElement.appendChild(divArticleContent);
+
     container.appendChild(divAccordionElement);
   }
 
@@ -73,12 +65,13 @@
     });
   }
 
-  function getElements() {
-    const mainElement = document.getElementById("main");
+  async function getArticles() {
+    const url = `http://localhost:3030/jsonstore/advanced/articles/list`;
 
-    return {
-      mainElement,
-    };
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
   }
 
   async function getSingleArticle(id) {
@@ -89,6 +82,14 @@
     const data = await response.json();
 
     return data;
+  }
+
+  function getElements() {
+    const mainElement = document.getElementById("main");
+
+    return {
+      mainElement,
+    };
   }
 
   async function toggleArticleContent(articleId, container) {

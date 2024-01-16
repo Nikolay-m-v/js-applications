@@ -31,6 +31,10 @@ body {
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .head {
   background: #ccccff;
   padding: 1em;
