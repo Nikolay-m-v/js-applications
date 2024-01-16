@@ -28,6 +28,14 @@
     return articles;
   }
 
+  function renderToggleArticleButton(article, articleContent) {
+    const toggleButtonElement = document.createElement("button");
+
+    toggleButtonElement.classList.add("button");
+    toggleButtonElement.id = "ee9823ab-c3e8-4a14-b998-8c22ec246bd3";
+    toggleButtonElement.textContent = "MORE";
+  }
+
   function renderSingleArticle(article, container) {
     const divAccordionElement = document.createElement("div");
     divAccordionElement.classList.add("accordion");
@@ -35,23 +43,22 @@
     const divHeadElement = document.createElement("div");
     divHeadElement.classList.add("head");
 
-    const spanElement = document.createElement("span");
-    spanElement.textContent = article.title;
+    const spanTitleElement = document.createElement("span");
+    spanTitleElement.innerHTML = article.title;
 
-    const toggleButtonElement = document.createElement("button");
-    toggleButtonElement.classList.add("button");
-    toggleButtonElement.id = "ee9823ab-c3e8-4a14-b998-8c22ec246bd3";
-    toggleButtonElement.textContent = "MORE";
-
-    const divExtraElement = document.createElement("extra");
+    const divArticleContent = document.createElement("div");
     divAccordionElement.classList.add("extra");
+
+    toggleArticleContent = renderToggleArticleButton(
+      article,
+      divArticleContent
+    );
 
     const pElement = document.createElement("p");
     pElement.textContent = article.content;
-    divHeadElement.appendChild(spanElement);
-    divHeadElement.appendChild(toggleButtonElement);
+    divHeadElement.appendChild(spanTitleElement);
     divAccordionElement.appendChild(divHeadElement);
-    divExtraElement.appendChild(pElement);
+    divArticleContent.appendChild(pElement);
     container.appendChild(divAccordionElement);
   }
 
@@ -77,6 +84,13 @@
     const data = await response.json();
 
     return data;
+  }
+
+  async function toggleArticleContent(articleId, container) {
+    const article = await getSingleArticle(articleId);
+
+    container.classList.toggle("hidden");
+    container.innerHTML = article.content;
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
