@@ -69,6 +69,16 @@
     };
   }
 
+  async function getSingleArticle(id) {
+    let url = `http://localhost:3030/jsonstore/advanced/articles/details/${id}`;
+
+    const response = await fetch(url);
+
+    const data = await response.json();
+
+    return data;
+  }
+
   document.addEventListener("DOMContentLoaded", async () => {
     const elements = getElements();
 
