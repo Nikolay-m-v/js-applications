@@ -22,10 +22,9 @@
     const url = `http://localhost:3030/jsonstore/advanced/articles/list`;
 
     const response = await fetch(url);
-    const articles = await response.json();
-    console.log(articles);
+    const data = await response.json();
 
-    return articles;
+    return data;
   }
 
   function renderToggleArticleButton(article, articleContent) {
@@ -60,12 +59,11 @@
 
     const toggleButton = renderToggleArticleButton(article, divArticleContent);
 
-    const pElement = document.createElement("p");
-    pElement.textContent = article.content;
     divHeadElement.appendChild(spanTitleElement);
     divHeadElement.appendChild(toggleButton);
+
     divAccordionElement.appendChild(divHeadElement);
-    divArticleContent.appendChild(pElement);
+    divAccordionElement.appendChild(divArticleContent);
     container.appendChild(divAccordionElement);
   }
 
