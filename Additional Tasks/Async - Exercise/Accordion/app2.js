@@ -28,7 +28,26 @@
     return articles;
   }
 
-  function renderSingleArticle() {}
+  function renderSingleArticle(article) {
+    const divAccordionElement = document.createElement("div");
+    divAccordionElement.classList.add = "accordion";
+
+    const divHeadElement = document.createElement("div");
+    divAccordionElement.classList.add = "head";
+
+    const spanElement = document.createElement("span");
+    spanElement.textContent = article.title;
+
+    const toggleButtonElement = document.createElement("button");
+    toggleButtonElement.classList.add = "button";
+    toggleButtonElement.id = "ee9823ab-c3e8-4a14-b998-8c22ec246bd3";
+    toggleButtonElement.text = "MORE";
+
+    const divExtraElement = document.createElement("extra");
+    divAccordionElement.classList.add = "extra";
+
+    const pElement = document.createElement("p");
+  }
 
   function renderArticles(articles) {
     articles.forEach((article) => {
