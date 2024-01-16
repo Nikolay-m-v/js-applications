@@ -32,8 +32,15 @@
     const toggleButtonElement = document.createElement("button");
 
     toggleButtonElement.classList.add("button");
-    toggleButtonElement.id = "ee9823ab-c3e8-4a14-b998-8c22ec246bd3";
-    toggleButtonElement.textContent = "MORE";
+    toggleButtonElement.setAttribute("id", article._id);
+    toggleButtonElement.innerHTML = "MORE";
+
+    toggleButtonElement.addEventListener("click", () => {
+      toggleButton.innerHTML = articleContent.classList.contains("hidden")
+        ? "Less"
+        : "More";
+      toggleArticleContent(article._id, articleContent);
+    });
   }
 
   function renderSingleArticle(article, container) {
@@ -47,7 +54,7 @@
     spanTitleElement.innerHTML = article.title;
 
     const divArticleContent = document.createElement("div");
-    divAccordionElement.classList.add("extra");
+    divArticleContent.classList.add("hidden");
 
     toggleArticleContent = renderToggleArticleButton(
       article,
