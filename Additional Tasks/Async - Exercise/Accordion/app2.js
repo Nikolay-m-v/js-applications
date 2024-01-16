@@ -29,18 +29,20 @@
   }
 
   function renderToggleArticleButton(article, articleContent) {
-    const toggleButtonElement = document.createElement("button");
+    const toggleButton = document.createElement("button");
 
-    toggleButtonElement.classList.add("button");
-    toggleButtonElement.setAttribute("id", article._id);
-    toggleButtonElement.innerHTML = "MORE";
+    toggleButton.classList.add("button");
+    toggleButton.setAttribute("id", article._id);
+    toggleButton.innerHTML = "MORE";
 
-    toggleButtonElement.addEventListener("click", () => {
+    toggleButton.addEventListener("click", () => {
       toggleButton.innerHTML = articleContent.classList.contains("hidden")
         ? "Less"
         : "More";
       toggleArticleContent(article._id, articleContent);
     });
+
+    return toggleButton;
   }
 
   function renderSingleArticle(article, container) {
@@ -56,14 +58,12 @@
     const divArticleContent = document.createElement("div");
     divArticleContent.classList.add("hidden");
 
-    toggleArticleContent = renderToggleArticleButton(
-      article,
-      divArticleContent
-    );
+    const toggleButton = renderToggleArticleButton(article, divArticleContent);
 
     const pElement = document.createElement("p");
     pElement.textContent = article.content;
     divHeadElement.appendChild(spanTitleElement);
+    divHeadElement.appendChild(toggleButton);
     divAccordionElement.appendChild(divHeadElement);
     divArticleContent.appendChild(pElement);
     container.appendChild(divAccordionElement);
