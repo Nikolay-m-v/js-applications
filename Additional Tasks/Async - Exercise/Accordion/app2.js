@@ -22,36 +22,42 @@
     const url = `http://localhost:3030/jsonstore/advanced/articles/list`;
 
     const response = await fetch(url);
-    const articles = response.json();
+    const articles = await response.json();
     console.log(articles);
 
     return articles;
   }
 
-  function renderSingleArticle(article) {
+  function renderSingleArticle(article, container) {
     const divAccordionElement = document.createElement("div");
-    divAccordionElement.classList.add = "accordion";
+    divAccordionElement.classList.add("accordion");
 
     const divHeadElement = document.createElement("div");
-    divAccordionElement.classList.add = "head";
+    divHeadElement.classList.add("head");
 
     const spanElement = document.createElement("span");
     spanElement.textContent = article.title;
 
     const toggleButtonElement = document.createElement("button");
-    toggleButtonElement.classList.add = "button";
+    toggleButtonElement.classList.add("button");
     toggleButtonElement.id = "ee9823ab-c3e8-4a14-b998-8c22ec246bd3";
-    toggleButtonElement.text = "MORE";
+    toggleButtonElement.textContent = "MORE";
 
     const divExtraElement = document.createElement("extra");
-    divAccordionElement.classList.add = "extra";
+    divAccordionElement.classList.add("extra");
 
     const pElement = document.createElement("p");
+    pElement.textContent = article.content;
+    divHeadElement.appendChild(spanElement);
+    divHeadElement.appendChild(toggleButtonElement);
+    divAccordionElement.appendChild(divHeadElement);
+    divExtraElement.appendChild(pElement);
+    container.appendChild(divAccordionElement);
   }
 
-  function renderArticles(articles) {
+  function renderArticles(articles, container) {
     articles.forEach((article) => {
-      renderSingleArticle();
+      renderSingleArticle(article, container);
     });
   }
 
@@ -62,5 +68,12 @@
       mainElement,
     };
   }
-  getArticles();
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const elements = getElements();
+
+    const articles = await getArticles();
+
+    renderArticles(articles, elements.mainElement);
+  });
 })();
