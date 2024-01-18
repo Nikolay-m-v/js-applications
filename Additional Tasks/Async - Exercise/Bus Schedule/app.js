@@ -30,8 +30,6 @@ function solve() {
     infoElement.textContent = `Arriving at ${busStop.name}`;
     arriveBtn.disabled = true;
     departBtn.disabled = false;
-
-    fetch;
   }
 
   return {
