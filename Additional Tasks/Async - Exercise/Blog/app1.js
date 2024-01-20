@@ -2,7 +2,6 @@
 
 (async function main() {
   let postsUrl = `http://localhost:3030/jsonstore/blog/posts`;
-  let commentsUrl = `http://localhost:3030/jsonstore/blog/comments`;
 
   const loadPostsBtn = document.getElementById("btnLoadPosts");
   const dropDownPosts = document.getElementById("posts");
@@ -26,5 +25,27 @@
       optionElement.textContent = data[postId].title;
       dropDownPosts.appendChild(optionElement);
     }
+  }
+
+  viewPostBtn.addEventListener("click", () => {
+    viewPost();
+  });
+
+  async function viewPost() {
+    let selectedPostId = dropDownPosts.value;
+    let commentsUrl = `http://localhost:3030/jsonstore/blog/comments/`;
+
+    const postResponse = await fetch(
+      `http://localhost:3030/jsonstore/blog/posts/${selectedPostId}`
+    );
+
+    const postData = await postResponse.json();
+
+    postTitleElement.textContent = postData.title;
+    postBodyElement.textContent = postData.body;
+
+    const commentsResponse = await fetch(commentsUrl);
+    const commentsData = await commentsResponse.json();
+    console.log(commentsData);
   }
 })();
