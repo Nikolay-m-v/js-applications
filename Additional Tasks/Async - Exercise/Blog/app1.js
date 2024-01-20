@@ -47,5 +47,16 @@
     const commentsResponse = await fetch(commentsUrl);
     const commentsData = await commentsResponse.json();
     console.log(commentsData);
+    const postCommentsData = Object.values(commentsData).filter(
+      (comment) => comment.postId === selectedPostId
+    );
+
+    postComments.innerHTML = "";
+
+    postCommentsData.forEach((comment) => {
+      const liElement = document.createElement("li");
+      liElement.textContent = comment.text;
+      postComments.appendChild(liElement);
+    });
   }
 })();
