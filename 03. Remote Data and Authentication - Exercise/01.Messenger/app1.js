@@ -44,12 +44,17 @@ function main() {
     try {
       const response = await fetch(urlRequests);
       if (!response.ok) {
-        console.log("Error");
+        throw new Error("Error");
       }
 
       const data = await response.json();
 
-      console.log(data);
+      let textArea = document.getElementById("messages");
+      let comments = [];
+      Object.values(data).forEach((user) => {
+        comments.push(`${user.author}: ${user.content}`);
+      });
+      textArea.value = comments.join("\n");
     } catch (error) {
       console.log(error);
     }
