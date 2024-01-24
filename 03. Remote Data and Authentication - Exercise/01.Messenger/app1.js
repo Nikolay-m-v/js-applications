@@ -5,10 +5,6 @@ function main() {
   document.querySelector("#refresh").addEventListener("click", displayComments);
   document.querySelector("#submit").addEventListener("click", addComment);
 
-  sendBtn.addEventListener("click", () => {
-    addComment();
-  });
-
   async function addComment() {
     let authorName = document.querySelector('[name="author"]');
     let content = document.querySelector('[name="content"]');
@@ -33,14 +29,14 @@ function main() {
         throw new Error("Error");
       }
 
-      const data = response.json();
-      return data;
+      const data = await response.json();
+
+      authorName.value = "";
+      content.value = "";
     } catch (error) {
       console.log(error);
     }
 
-    authorName.value = "";
-    content.value = "";
     displayComments();
   }
 
