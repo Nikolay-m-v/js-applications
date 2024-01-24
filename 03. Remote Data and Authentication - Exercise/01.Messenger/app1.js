@@ -17,22 +17,29 @@ async function addComment() {
     return;
   }
 
-  const response = await fetch(url, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      author: authorName.value.trim(),
-      content: content.value.trim(),
-    }),
-  });
+  try {
+    const response = await fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        author: authorName.value.trim(),
+        content: content.value.trim(),
+      }),
+    });
 
-  if (!response.ok) {
-    throw new Error("Error");
+    if (!response.ok) {
+      throw new Error("Error");
+    }
+
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
   }
 
-  const data = response.json();
-
-  return data;
+  authorName.value = "";
+  content.value = "";
+  displayComments();
 }
