@@ -6,7 +6,6 @@ function main() {
   const ulPhonebookElement = document.getElementById("phonebook");
 
   const urlPhonebook = `http://localhost:3030/jsonstore/phonebook`;
-  const urlDeleteRequests = `http://localhost:3030/jsonstore/phonebook/:key>`;
 
   btnLoad.addEventListener("click", () => {
     loadPhonebook();
