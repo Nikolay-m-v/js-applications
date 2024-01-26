@@ -6,24 +6,25 @@ function main() {
   let form = document.querySelector("form");
 
   window.addEventListener("load", loadStudents);
+  form.addEventListener("submit", createStudent);
 
   async function loadStudents() {
     try {
-      const response = await fetch(url);
+      let response = await fetch(url);
 
-      if (!response.ok) {
-        throw new Error("Error fetching data");
+      if (response.status !== 200) {
+        throw new Error("Error");
       }
 
-      const data = await response.json();
+      let data = await response.json();
 
       Object.values(data).forEach((record) => {
         let student = createElement(
           "tr",
-          createElement("td", record.FirstName),
-          createElement("td", record.LastName),
-          createElement("td", record.FacultyNumber),
-          createElement("td", record.Grade)
+          createElement("td", record.firstName),
+          createElement("td", record.lastName),
+          createElement("td", record.facultyNumber),
+          createElement("td", record.grade)
         );
 
         table.appendChild(student);
@@ -56,9 +57,27 @@ function main() {
           grade: gradeNumber,
         }),
       });
+
+      if (!response.ok) {
+        throw new Error("Error fetching data");
+      }
+
+      loadStudents();
     } catch (error) {
       console.log("Error");
     }
+  }
+
+  function createElement(type, ...content) {
+    let element = document.createElement(type);
+
+    content.forEach((content) => {
+      if (typeof content === "number" || typeof content === "string") {
+        content = document.createTextNode(content);
+      }
+      element.appendChild(content);
+    });
+    return element;
   }
 }
 
