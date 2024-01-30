@@ -2,11 +2,20 @@
 (function main() {
   const url = ` http://localhost:3030/jsonstore/messenger`;
 
-  sendButton.addEventListener("click", () => {
-    createNewMessage();
-  });
+  async function createNewMessage(author, content) {
+    const newMessage = { author, content };
 
-  function createNewMessage() {}
+    const response = await fetch(url, {
+      method: `POST`,
+      headers: {
+        "Content-Type": `application/json`,
+      },
+      body: JSON.stringify(newMessage),
+    });
+
+    const newlyCreatedMessage = await response.json();
+    return newlyCreatedMessage;
+  }
 
   function getElements() {
     const sendButton = document.getElementById("submit");
@@ -17,6 +26,25 @@
 
     return {
       sendButton,
+      refreshButton,
+      inputAuthor,
+      inputMessage,
+      messagesBox,
     };
   }
+
+  async function displayAllMessages() {
+    const response = await fetch(url);
+  }
+
+  function eventHandling() {
+    const els = getElements();
+
+    els.sendButton.addEventListener("click", () => {
+      createNewMessage();
+      displayAllMessages();
+    });
+  }
+
+  eventHandling();
 })();
