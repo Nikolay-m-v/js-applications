@@ -17,6 +17,24 @@
     return newlyCreatedMessage;
   }
 
+  function collectMessageData(elements) {
+    const author = elements.inputAuthor.value;
+    const content = elements.inputMessage.value;
+
+    const data = {
+      author,
+      content,
+    };
+
+    return data;
+  }
+
+  async function submitNewMessage(elements) {
+    const newMessage = collectMessageData(elements);
+
+    await createNewMessage(newMessage.author, newMessage.content);
+  }
+
   async function getAllMessages() {
     const response = await fetch(url);
     const messages = await response.json();
@@ -24,42 +42,45 @@
     return messages;
   }
 
-  async function displayAllMessages(els) {
+  function formatMessage(message) {
+    const formattedMessage = `${message.author}: ${message.content}\n`;
+    return formattedMessage;
+  }
+
+  async function displayAllMessages(elements) {
     const allMessages = await getAllMessages();
 
-    Object.keys(allMessages).forEach((message) => {
-      els.messagesBox += createNewMessage();
+    Object.values(allMessages).forEach((message) => {
+      elements.messagesBox.value += formatMessage(message);
+    });
+  }
+
+  function eventHandling() {
+    const elements = getElements();
+
+    elements.sendButton.addEventListener("click", () => {
+      submitNewMessage(elements);
+      displayAllMessages(elements);
+    });
+
+    elements.refreshButton.addEventListener("click", () => {
+      displayAllMessages(elements);
     });
   }
 
   function getElements() {
-    const sendButton = document.getElementById("submit");
-    const refreshButton = document.getElementById("refresh");
-    const inputAuthor = document.querySelector(`input[name="author"]`);
-    const inputMessage = document.querySelector(`input[name="message]`);
-    const messagesBox = document.getElementById("messages");
-
-    return {
-      sendButton,
-      refreshButton,
-      inputAuthor,
-      inputMessage,
-      messagesBox,
+    const elements = {
+      sendButton: document.getElementById("submit"),
+      refreshButton: document.getElementById("refresh"),
+      inputAuthor: document.querySelector(`input[name="author"]`),
+      inputMessage: document.querySelector(`input[name="message"]`),
+      messagesBox: document.getElementById("messages"),
     };
+
+    return elements;
   }
 
-  function eventHandling() {
-    const els = getElements();
-
-    els.sendButton.addEventListener("click", () => {
-      createNewMessage();
-      displayAllMessages();
-    });
-
-    els.refreshButton.addEventListener("click", () => {
-      displayAllMessages();
-    });
-  }
-
-  eventHandling();
+  document.addEventListener("DOMContentLoaded", async () => {
+    eventHandling();
+  });
 })();
