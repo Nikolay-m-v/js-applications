@@ -17,6 +17,21 @@
     return newlyCreatedMessage;
   }
 
+  async function getAllMessages() {
+    const response = await fetch(url);
+    const messages = await response.json();
+
+    return messages;
+  }
+
+  async function displayAllMessages(els) {
+    const allMessages = await getAllMessages();
+
+    Object.keys(allMessages).forEach((message) => {
+      els.messagesBox += createNewMessage();
+    });
+  }
+
   function getElements() {
     const sendButton = document.getElementById("submit");
     const refreshButton = document.getElementById("refresh");
@@ -33,15 +48,15 @@
     };
   }
 
-  async function displayAllMessages() {
-    const response = await fetch(url);
-  }
-
   function eventHandling() {
     const els = getElements();
 
     els.sendButton.addEventListener("click", () => {
       createNewMessage();
+      displayAllMessages();
+    });
+
+    els.refreshButton.addEventListener("click", () => {
       displayAllMessages();
     });
   }
