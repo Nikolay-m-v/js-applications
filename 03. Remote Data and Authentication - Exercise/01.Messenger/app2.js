@@ -1,20 +1,26 @@
 "use strict";
-(function main() {
+(async function () {
   const url = ` http://localhost:3030/jsonstore/messenger`;
 
   async function createNewMessage(author, content) {
-    const newMessage = { author, content };
+    const newMessageContent = { author, content };
 
     const response = await fetch(url, {
       method: `POST`,
       headers: {
         "Content-Type": `application/json`,
       },
-      body: JSON.stringify(newMessage),
+      body: JSON.stringify(newMessageContent),
     });
 
     const newlyCreatedMessage = await response.json();
     return newlyCreatedMessage;
+  }
+
+  function validateMessage(message) {
+    const isValid = message.author !== "" && message.content !== "";
+
+    return isValid;
   }
 
   function collectMessageData(elements) {
@@ -32,6 +38,10 @@
   async function submitNewMessage(elements) {
     const newMessage = collectMessageData(elements);
 
+    if (validateMessage(newMessage) === false) {
+      return;
+    }
+
     await createNewMessage(newMessage.author, newMessage.content);
   }
 
@@ -47,7 +57,12 @@
     return formattedMessage;
   }
 
+  function clearTextArea(elements) {
+    elements.messagesBox.value = "";
+  }
+
   async function displayAllMessages(elements) {
+    clearTextArea(elements);
     const allMessages = await getAllMessages();
 
     Object.values(allMessages).forEach((message) => {
@@ -63,7 +78,7 @@
       displayAllMessages(elements);
     });
 
-    elements.refreshButton.addEventListener("click", () => {
+    elements.refreshButton.addEventListener("click", async () => {
       displayAllMessages(elements);
     });
   }
@@ -73,7 +88,7 @@
       sendButton: document.getElementById("submit"),
       refreshButton: document.getElementById("refresh"),
       inputAuthor: document.querySelector(`input[name="author"]`),
-      inputMessage: document.querySelector(`input[name="message"]`),
+      inputMessage: document.querySelector(`input[name="content"]`),
       messagesBox: document.getElementById("messages"),
     };
 
