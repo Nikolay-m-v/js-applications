@@ -3,16 +3,18 @@
 (function () {
   const phonebookUrl = `http://localhost:3030/jsonstore/phonebook`;
   const postGetUrlRequests = `http://localhost:3030/jsonstore/phonebook`;
-  const deleteUrlRequests = `http://localhost:3030/jsonstore/phonebook/:key>`;
+
+  function clearPhonebook(elements) {
+    elements.ulElement.innerHTML = "";
+  }
 
   async function getAllEntries(elements) {
+    clearPhonebook(elements);
     const response = await fetch(phonebookUrl);
 
     const data = await response.json();
 
-    console.log(data);
     Object.values(data).forEach((entry) => {
-      console.log(entry);
       const personName = entry.person;
       const phoneNumber = entry.phone;
       const liElement = document.createElement("li");
@@ -20,11 +22,25 @@
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.setAttribute("id", entry._id);
-      console.log(liElement);
-
       liElement.appendChild(deleteButton);
       elements.ulElement.appendChild(liElement);
+
+      deleteButton.addEventListener("click", () => {
+        const entryId = deleteButton.getAttribute("id");
+        deleteEntry(entryId);
+      });
     });
+  }
+
+  async function deleteEntry(entry) {
+    const deleteUrl = `http://localhost:3030/jsonstore/phonebook/${entry}`;
+    const response = await fetch(deleteUrl, {
+      method: "DELETE",
+    });
+
+    console.log(`Entry with ID ${entry} deleted successfully`);
+
+    console.log(entry);
   }
 
   function getElements() {
