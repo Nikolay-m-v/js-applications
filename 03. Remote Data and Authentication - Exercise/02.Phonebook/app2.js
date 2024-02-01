@@ -5,7 +5,7 @@
   const postGetUrlRequests = `http://localhost:3030/jsonstore/phonebook`;
   const deleteUrlRequests = `http://localhost:3030/jsonstore/phonebook/:key>`;
 
-  async function getAllEntries() {
+  async function getAllEntries(elements) {
     const response = await fetch(phonebookUrl);
 
     const data = await response.json();
@@ -15,6 +15,15 @@
       console.log(entry);
       const personName = entry.person;
       const phoneNumber = entry.phone;
+      const liElement = document.createElement("li");
+      liElement.textContent = `${personName}: ${phoneNumber}`;
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.setAttribute("id", entry._id);
+      console.log(liElement);
+
+      liElement.appendChild(deleteButton);
+      elements.ulElement.appendChild(liElement);
     });
   }
 
