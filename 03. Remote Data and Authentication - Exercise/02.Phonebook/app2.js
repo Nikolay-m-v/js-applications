@@ -1,6 +1,23 @@
 "use strict";
 
 (function () {
+  const phonebookUrl = `http://localhost:3030/jsonstore/phonebook`;
+  const postGetUrlRequests = `http://localhost:3030/jsonstore/phonebook`;
+  const deleteUrlRequests = `http://localhost:3030/jsonstore/phonebook/:key>`;
+
+  async function getAllEntries() {
+    const response = await fetch(phonebookUrl);
+
+    const data = await response.json();
+
+    console.log(data);
+    Object.values(data).forEach((entry) => {
+      console.log(entry);
+      const personName = entry.person;
+      const phoneNumber = entry.phone;
+    });
+  }
+
   function getElements() {
     const elements = {
       ulElement: document.getElementById("phonebook"),
@@ -15,6 +32,10 @@
 
   function eventHandling() {
     const elements = getElements();
+
+    elements.loadBtn.addEventListener("click", () => {
+      getAllEntries(elements);
+    });
   }
 
   eventHandling();
