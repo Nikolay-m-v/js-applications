@@ -10,7 +10,7 @@
 
   function checkInputFields(elements) {
     const isValid =
-      elements.nameInput.value === "" && elements.phoneInput.value === "";
+      elements.nameInput.value !== "" && elements.phoneInput.value !== "";
 
     return isValid;
   }
@@ -61,7 +61,7 @@
 
       deleteButton.addEventListener("click", () => {
         const entryId = deleteButton.getAttribute("id");
-        deleteEntry(entryId);
+        deleteEntry(entryId, elements);
       });
     });
   }
