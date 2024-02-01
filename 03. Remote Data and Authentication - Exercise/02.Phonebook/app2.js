@@ -9,9 +9,10 @@
   }
 
   function checkInputFields(elements) {
-    if (elements.nameInput.value === "" || elements.phoneInput.value === "") {
-      return;
-    }
+    const isValid =
+      elements.nameInput.value === "" && elements.phoneInput.value === "";
+
+    return isValid;
   }
 
   function clearInputValues(elements) {
@@ -20,7 +21,9 @@
   }
 
   async function createEntry(elements) {
-    checkInputFields(elements);
+    if (checkInputFields(elements)) {
+      return;
+    }
 
     const entryData = {
       person: elements.nameInput.value.trim(),
@@ -63,7 +66,7 @@
     });
   }
 
-  async function deleteEntry(entry) {
+  async function deleteEntry(entry, elements) {
     const deleteUrl = `http://localhost:3030/jsonstore/phonebook/${entry}`;
     const response = await fetch(deleteUrl, {
       method: "DELETE",
@@ -71,8 +74,7 @@
 
     console.log(`Entry with ID ${entry} deleted successfully`);
 
-    console.log(entry);
-    getAllEntries();
+    getAllEntries(elements);
   }
 
   function getElements() {
