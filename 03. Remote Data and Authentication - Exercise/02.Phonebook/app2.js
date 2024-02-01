@@ -8,6 +8,37 @@
     elements.ulElement.innerHTML = "";
   }
 
+  function checkInputFields(elements) {
+    if (elements.nameInput.value === "" || elements.phoneInput.value === "") {
+      return;
+    }
+  }
+
+  function clearInputValues(elements) {
+    elements.nameInput.value = "";
+    elements.phoneInput.value = "";
+  }
+
+  async function createEntry(elements) {
+    checkInputFields(elements);
+
+    const entryData = {
+      person: elements.nameInput.value.trim(),
+      phone: elements.phoneInput.value.trim(),
+    };
+    const response = await fetch(postGetUrlRequests, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(entryData),
+    });
+
+    const data = await response.json();
+
+    clearInputValues(elements);
+  }
+
   async function getAllEntries(elements) {
     clearPhonebook(elements);
     const response = await fetch(phonebookUrl);
@@ -41,6 +72,7 @@
     console.log(`Entry with ID ${entry} deleted successfully`);
 
     console.log(entry);
+    getAllEntries();
   }
 
   function getElements() {
@@ -48,7 +80,7 @@
       ulElement: document.getElementById("phonebook"),
       loadBtn: document.getElementById("btnLoad"),
       nameInput: document.getElementById("person"),
-      phoneInput: document.getElementById("number"),
+      phoneInput: document.getElementById("phone"),
       createBtn: document.getElementById("btnCreate"),
     };
 
@@ -60,6 +92,10 @@
 
     elements.loadBtn.addEventListener("click", () => {
       getAllEntries(elements);
+    });
+
+    elements.createBtn.addEventListener("click", () => {
+      createEntry(elements);
     });
   }
 
