@@ -9,10 +9,10 @@
   }
 
   function checkInputFields(elements) {
-    const isValid =
-      elements.nameInput.value !== "" && elements.phoneInput.value !== "";
+    const isInvalid =
+      elements.nameInput.value === "" && elements.phoneInput.value === "";
 
-    return isValid;
+    return isInvalid;
   }
 
   function clearInputValues(elements) {
