@@ -29,6 +29,7 @@
       person: elements.nameInput.value.trim(),
       phone: elements.phoneInput.value.trim(),
     };
+
     const response = await fetch(postGetUrlRequests, {
       method: "post",
       headers: {
@@ -103,3 +104,5 @@
 
   eventHandling();
 })();
+
+/// videos
