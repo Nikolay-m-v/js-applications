@@ -9,24 +9,24 @@
 
   async function loadStudents() {
     const response = await fetch(url);
-
     const data = await response.json();
 
     Object.values(data).forEach((record) => {
-      let student = document.createElement(
-        "tr",
-        document.createElement("td", record.firstName),
-        document.createElement("td", record.lastName),
-        document.createElement("td", record.facultyNumber),
-        document.createElement("td", record.grade)
-      );
+      let student = document.createElement("tr");
+
+      ["firstName", "lastName", "facultyNumber", "grade"].forEach((field) => {
+        let cell = document.createElement("td");
+        cell.textContent = record[field];
+        student.appendChild(cell);
+      });
       table.appendChild(student);
     });
   }
 
   async function createStudent(event) {
     event.preventDefault();
-    const formData = FormData(form);
+
+    const formData = new FormData(form);
     const studentData = {};
     formData.forEach((value, key) => {
       studentData[key] = value;
