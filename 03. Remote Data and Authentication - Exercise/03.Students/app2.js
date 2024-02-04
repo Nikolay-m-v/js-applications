@@ -6,6 +6,7 @@
   let form = document.querySelector("form");
 
   form.addEventListener("submit", createStudent);
+  window.addEventListener("load", loadStudents);
 
   async function loadStudents() {
     const response = await fetch(url);
@@ -50,5 +51,4 @@
 
     table.appendChild(student);
   }
-  loadStudents();
 })();
