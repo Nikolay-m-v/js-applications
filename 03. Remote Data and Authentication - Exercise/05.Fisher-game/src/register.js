@@ -27,7 +27,7 @@
     }
     const response = await fetch(url, {
       method: "POST",
-      body: {
+      headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
@@ -39,10 +39,10 @@
     if (!response.ok) {
       const errorData = await response.json();
       console.log(`Registration failed: ${errorData.message}`);
+    } else {
+      sessionStorage.setItem("userEmail", emailInput.value);
+      console.log("Registration Successful");
+      window.location.href = "/home.html";
     }
-
-    sessionStorage.setItem("userEmail", emailInput.value);
-
-    window.location.href = "/home.html";
   }
 })();
