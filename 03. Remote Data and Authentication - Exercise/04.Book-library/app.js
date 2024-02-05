@@ -4,6 +4,7 @@
   const booksUrl = `http://localhost:3030/jsonstore/collections/books`;
   const loadButton = document.getElementById("loadBooks");
   const form = document.querySelector("form");
+  const tbodyElement = document.getElementsByTagName("tbody")[0];
   const createBookButton = document.getElementById("submit");
 
   loadButton.addEventListener("click", () => {
@@ -20,7 +21,7 @@
 
     if (nameInput.value === "" || authorInput.value === "") {
       console.log("Fill all inputs!");
-      return;
+      return false;
     }
   }
 
@@ -28,13 +29,50 @@
     const response = await fetch(booksUrl);
     const data = await response.json();
 
-    console.log(data);
+    let entries = Object.entries(data);
+
+    tbodyElement.innerHTML = "";
+
+    for (let [key, { author, title }] of entries) {
+      let trElement = document.createElement("tr");
+      let titleTDElement = document.createElement("td");
+      titleTDElement.textContent = title;
+      let authorTDElement = document.createElement("td");
+      authorTDElement.textContent = author;
+
+      trElement.appendChild(titleTDElement);
+      trElement.appendChild(authorTDElement);
+
+      let newTDElement = document.createElement("td");
+      let editButton = document.createElement("button");
+      editButton.textContent = `Edit`;
+      let deleteButton = document.createElement("button");
+      deleteButton.textContent = `Delete`;
+      deleteButton.addEventListener("click", remove);
+
+      newTDElement.appendChild(editButton);
+      newTDElement.appendChild(deleteButton);
+
+      trElement.appendChild(newTDElement);
+      tbodyElement.appendChild(trElement);
+
+      function remove(event) {
+        event.preventDefault();
+        fetch(`${booksUrl}/${key}`, {
+          method: "delete",
+        });
+      }
+    }
+
+    console.log(entries);
   }
 
   async function createNewBook(event) {
     event.preventDefault();
     const bookData = {};
-    checkInputValues();
+    if (!checkInputValues()) {
+      return;
+    }
 
     const formData = new FormData(form);
     formData.forEach((value, key) => {
