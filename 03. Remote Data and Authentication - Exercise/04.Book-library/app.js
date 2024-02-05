@@ -15,6 +15,15 @@
     createNewBook(event);
   });
 
+  tbodyElement.addEventListener("click", (event) => {
+    if (
+      event.target.tagName === "BUTTON" &&
+      event.target.textContent === "Edit"
+    ) {
+      editBook(event.target.closest("tr"));
+    }
+  });
+
   function checkInputValues() {
     const nameInput = document.querySelector(`input[name="title"]`);
     const authorInput = document.querySelector(`input[name="author"]`);
@@ -22,6 +31,24 @@
     if (nameInput.value === "" || authorInput.value === "") {
       console.log("Fill all inputs!");
       return false;
+    }
+  }
+
+  function editBook(row) {
+    if (!row || !row.cells || row.cells.length < 2) {
+      console.error("Invalid row for editing");
+      return;
+    }
+
+    const title = row.cells[0].textContent;
+    const author = row.cells[1].textContent;
+
+    const titleInput = document.querySelector(`input[name="title"]`);
+    const authorInput = document.querySelector(`input[name="author"]`);
+
+    if (titleInput && authorInput) {
+      titleInput.value = title;
+      authorInput.value = author;
     }
   }
 
@@ -49,6 +76,9 @@
       let deleteButton = document.createElement("button");
       deleteButton.textContent = `Delete`;
       deleteButton.addEventListener("click", remove);
+      editButton.addEventListener("click", editBook);
+
+      editButton.addEventListener("click", () => editBook(trElement));
 
       newTDElement.appendChild(editButton);
       newTDElement.appendChild(deleteButton);
@@ -63,14 +93,12 @@
         });
       }
     }
-
-    console.log(entries);
   }
 
   async function createNewBook(event) {
     event.preventDefault();
     const bookData = {};
-    if (!checkInputValues()) {
+    if (checkInputValues()) {
       return;
     }
 
@@ -78,8 +106,6 @@
     formData.forEach((value, key) => {
       bookData[key] = value;
     });
-
-    console.log(formData);
 
     const response = await fetch(booksUrl, {
       method: "post",
@@ -90,6 +116,7 @@
     });
 
     const newBook = await response.json();
-    console.log(newBook);
+
+    getBooks();
   }
 })();
