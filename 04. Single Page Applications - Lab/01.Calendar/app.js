@@ -2,10 +2,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const yearsContainer = document.getElementById("years");
-  const monthsContainer = document.querySelectorAll(".monthCalendar");
+  const monthsContainers = document.querySelectorAll(".monthCalendar");
   const daysContainer = document.querySelectorAll(".daysCalendar");
 
-  monthsContainer.forEach((month) => {
+  monthsContainers.forEach((month) => {
     month.style.display = "none";
   });
 
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showMonths(year) {
     const selectedYearContainer = document.getElementById(`year-${year}`);
     if (selectedYearContainer) {
-      monthsContainer.forEach((month) => {
+      monthsContainers.forEach((month) => {
         month.style.display = "none";
       });
 
@@ -37,5 +37,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function initMonthContainers() {
+    monthsContainers.forEach((monthContainer) => {
+      const monthElements = monthContainer.querySelectorAll(".date");
+      monthElements.forEach((monthElement) => {
+        monthElement.addEventListener("click", () => {
+          const selectedMonth = monthElement.textContent.trim();
+          showDays(selectedMonth);
+        });
+      });
+    });
+  }
+
+  function showDays(month) {
+    const selectedMonthContainer = document.getElementById(`month-${month}`);
+    if (selectedMonthContainer) {
+      monthsContainers.forEach((monthContainer) => {
+        monthContainer.style.display = "none";
+      });
+      selectedMonthContainer.style.display = "block";
+    } else {
+      console.log(`Month container for ${month} not found.`);
+    }
+  }
+
   initCalendar();
+  initMonthContainers();
 });
