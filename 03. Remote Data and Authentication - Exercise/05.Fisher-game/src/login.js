@@ -6,6 +6,15 @@
   const passwordInput = document.querySelector(`input[name="password"]`);
   const loginButton = document.getElementsByTagName("button")[0];
 
+  window.addEventListener("DOMContentLoaded", () => {
+    isUserLoggedIn();
+  });
+
+  const userData = sessionStorage.getItem("userData");
+  console.log(userData);
+
+  function isUserLoggedIn() {}
+
   loginButton.addEventListener("click", (event) => {
     loginUser(event);
   });
