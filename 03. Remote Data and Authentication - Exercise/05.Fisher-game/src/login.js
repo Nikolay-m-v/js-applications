@@ -7,13 +7,14 @@
   const loginButton = document.getElementsByTagName("button")[0];
 
   window.addEventListener("DOMContentLoaded", () => {
-    isUserLoggedIn();
+    if (isLoggedIn()) {
+    }
   });
 
-  const userData = sessionStorage.getItem("userData");
-  console.log(userData);
-
-  function isUserLoggedIn() {}
+  function isLoggedIn() {
+    const userData = sessionStorage.getItem("userData");
+    return userData !== null;
+  }
 
   loginButton.addEventListener("click", (event) => {
     loginUser(event);
