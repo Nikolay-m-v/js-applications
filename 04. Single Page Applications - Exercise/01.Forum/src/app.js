@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headerDiv.appendChild(userPostInfo);
         headerDiv.appendChild(postContent);
         commentDiv.appendChild(headerDiv);
+        elements.postsContainer.appendChild(commentDiv);
 
         const userCommentDiv = document.createElement("div");
         userCommentDiv.id = "user-comment";
@@ -92,11 +93,58 @@ document.addEventListener("DOMContentLoaded", () => {
         topicNameDiv.appendChild(commentContent);
         topicNameWrapperDiv.appendChild(topicNameDiv);
         userCommentDiv.appendChild(topicNameWrapperDiv);
+        elements.postsContainer.appendChild(userCommentDiv);
 
         const detailsView = document.getElementById("detailsView");
         detailsView.appendChild(titleDiv);
         detailsView.appendChild(commentDiv);
         detailsView.appendChild(userCommentDiv);
+
+        const answerCommentDiv = document.createElement("div");
+        answerCommentDiv.classList.add("answer-comment");
+
+        const commentTitle = document.createElement("p");
+        commentTitle.innerHTML = `<span>${post.username}</span> comment:`;
+        const answerDiv = document.createElement("div");
+        answerDiv.classList.add("answer");
+
+        const form = document.createElement("form");
+        const textarea = document.createElement("textarea");
+        textarea.name = "postText";
+        textarea.id = "comment";
+        textarea.cols = "30";
+        textarea.rows = "10";
+
+        const usernameDiv = document.createElement("div");
+        const usernameLabel = document.createElement("label");
+        usernameLabel.htmlFor = "username";
+        usernameLabel.textContent = "Username ";
+        const requiredSpan = document.createElement("span");
+        requiredSpan.classList.add("red");
+        requiredSpan.textContent = "*";
+        usernameLabel.appendChild(requiredSpan);
+        const usernameInput = document.createElement("input");
+        usernameInput.type = "text";
+        usernameInput.name = "username";
+        usernameInput.id = "username";
+
+        const postButton = document.createElement("button");
+        postButton.textContent = "Post";
+
+        // Append elements to form
+        usernameDiv.appendChild(usernameLabel);
+        usernameDiv.appendChild(usernameInput);
+
+        form.appendChild(textarea);
+        form.appendChild(usernameDiv);
+        form.appendChild(postButton);
+
+        answerDiv.appendChild(form);
+
+        answerCommentDiv.appendChild(commentTitle);
+        answerCommentDiv.appendChild(answerDiv);
+
+        detailsView.appendChild(answerCommentDiv);
       });
     }
 
