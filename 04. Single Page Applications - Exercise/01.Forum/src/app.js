@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userPostInfo = document.createElement("p");
         const usernameSpan = document.createElement("span");
         usernameSpan.id = "details-username";
-        usernameSpan.textContent = `${post.username}`; // This should be replaced with the actual username
+        usernameSpan.textContent = `${post.username}`;
         userPostInfo.appendChild(usernameSpan);
         userPostInfo.innerHTML += ` posted on <time id="details-time">${post.dateCreated}</time>`;
         const postContent = document.createElement("p");
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         topicNameDiv.classList.add("topic-name");
         const commenterInfo = document.createElement("p");
         const commenterName = document.createElement("strong");
-        commenterName.textContent = post.userName; // This should be replaced with the actual commenter's name
+        commenterName.textContent = post.userName;
         commenterInfo.appendChild(commenterName);
         commenterInfo.innerHTML += ` commented on <time>${post.commentDate}</time>`;
         const commentContent = document.createElement("div");
