@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         postContent: document.getElementById("postText"),
         postButton: document.querySelector(".public"),
         cancelButton: document.querySelector(".cancel"),
+        detailsView: document.querySelector("detailsView"),
       };
 
       return elements;
@@ -29,7 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch(postsUrl);
       const data = await response.json();
       console.log(data);
+
+      Object.values(data).forEach((post) => {
+        const titleElement = document.createElement("h2");
+        titleElement.textContent = post.title;
+        console.log(titleElement);
+      });
     }
+
+    function displayPosts() {}
 
     async function submitNewPost(event) {
       event.preventDefault();
