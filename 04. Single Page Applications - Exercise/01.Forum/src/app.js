@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
         postButton: document.querySelector(".public"),
         cancelButton: document.querySelector(".cancel"),
         detailsView: document.querySelector("detailsView"),
+        themeContentContainer: document.querySelector("theme-content"),
+        themeNameContainer: document.querySelector(".theme-name"),
+        themeTitleContainer: document.querySelector(".theme-title"),
+        postsContainer: document.querySelector(".container"),
       };
 
       return elements;
@@ -32,9 +36,67 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(data);
 
       Object.values(data).forEach((post) => {
-        const titleElement = document.createElement("h2");
-        titleElement.textContent = post.title;
-        console.log(titleElement);
+        const titleDiv = document.createElement("div");
+        titleDiv.classList.add("theme-title");
+        const titleNameWrapperDiv = document.createElement("div");
+        titleNameWrapperDiv.classList.add("theme-name-wrapper");
+        const titleNameDiv = document.createElement("div");
+        titleNameDiv.classList.add("theme-name");
+        const titleHeading = document.createElement("h2");
+        titleHeading.id = "details-title";
+        titleHeading.textContent = post.title;
+        titleNameDiv.appendChild(titleHeading);
+        titleNameWrapperDiv.appendChild(titleNameDiv);
+        titleDiv.appendChild(titleNameWrapperDiv);
+        elements.postsContainer.appendChild(titleDiv);
+
+        const commentDiv = document.createElement("div");
+        commentDiv.classList.add("comment");
+        const headerDiv = document.createElement("div");
+        headerDiv.classList.add("header");
+        const imgAvatar = document.createElement("img");
+        imgAvatar.src = "./static/profile.png";
+        imgAvatar.alt = "avatar";
+        const userPostInfo = document.createElement("p");
+        const usernameSpan = document.createElement("span");
+        usernameSpan.id = "details-username";
+        usernameSpan.textContent = `${post.username}`; // This should be replaced with the actual username
+        userPostInfo.appendChild(usernameSpan);
+        userPostInfo.innerHTML += ` posted on <time id="details-time">${post.dateCreated}</time>`;
+        const postContent = document.createElement("p");
+        postContent.id = "details-content";
+        postContent.classList.add("post-content");
+        postContent.textContent = post.content;
+        headerDiv.appendChild(imgAvatar);
+        headerDiv.appendChild(userPostInfo);
+        headerDiv.appendChild(postContent);
+        commentDiv.appendChild(headerDiv);
+
+        const userCommentDiv = document.createElement("div");
+        userCommentDiv.id = "user-comment";
+        const topicNameWrapperDiv = document.createElement("div");
+        topicNameWrapperDiv.classList.add("topic-name-wrapper");
+        const topicNameDiv = document.createElement("div");
+        topicNameDiv.classList.add("topic-name");
+        const commenterInfo = document.createElement("p");
+        const commenterName = document.createElement("strong");
+        commenterName.textContent = post.userName; // This should be replaced with the actual commenter's name
+        commenterInfo.appendChild(commenterName);
+        commenterInfo.innerHTML += ` commented on <time>${post.commentDate}</time>`;
+        const commentContent = document.createElement("div");
+        commentContent.classList.add("post-content");
+        const commentText = document.createElement("p");
+        commentText.textContent = post.commentContent;
+        commentContent.appendChild(commentText);
+        topicNameDiv.appendChild(commenterInfo);
+        topicNameDiv.appendChild(commentContent);
+        topicNameWrapperDiv.appendChild(topicNameDiv);
+        userCommentDiv.appendChild(topicNameWrapperDiv);
+
+        const detailsView = document.getElementById("detailsView");
+        detailsView.appendChild(titleDiv);
+        detailsView.appendChild(commentDiv);
+        detailsView.appendChild(userCommentDiv);
       });
     }
 
@@ -61,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }),
       });
 
+      getPosts();
       console.log(response);
     }
 
