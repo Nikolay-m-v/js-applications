@@ -64,5 +64,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initCalendar();
   initMonthContainers();
 });
-
-/// videos
