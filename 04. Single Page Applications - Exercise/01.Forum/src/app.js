@@ -2,21 +2,6 @@
 
 (function main() {
   const postsUrl = `http://localhost:3030/jsonstore/collections/myboard/posts`;
-  const titleName = document.getElementById("topicName");
-  const userName = document.getElementById("username");
-  const postContent = document.getElementById("postText");
-  const postButton = document.querySelector(".public");
-  const cancelButton = document.querySelector(".cancel");
-
-  postButton.addEventListener("click", () => {
-    submitNewPost();
-  });
-
-  cancelButton.addEventListener("click", () => {
-    titleName.value = "";
-    userName.value = "";
-    postContent.value = "";
-  });
 
   function validateFormValues() {
     let isValid = true;
@@ -30,5 +15,33 @@
     }
   }
 
-  async function submitNewPost() {}
+  async function submitNewPost() {
+    const response = await fetch(url);
+  }
+
+  function getElements() {
+    const elements = {
+      titleName: document.getElementById("topicName"),
+      userName: document.getElementById("username"),
+      postContent: document.getElementById("postText"),
+      postButton: document.querySelector(".public"),
+      cancelButton: document.querySelector(".cancel"),
+    };
+  }
+
+  function eventHandling() {
+    const elements = getElements();
+
+    elements.postButton.addEventListener("click", () => {
+      submitNewPost();
+    });
+
+    elements.cancelButton.addEventListener("click", () => {
+      titleName.value = "";
+      userName.value = "";
+      postContent.value = "";
+    });
+  }
+
+  eventHandling();
 })();
