@@ -2,21 +2,33 @@
 
 (function main() {
   const postsUrl = `http://localhost:3030/jsonstore/collections/myboard/posts`;
+  const elements = getElements();
 
   function validateFormValues() {
-    let isValid = true;
-    if (
-      titleName.value === "" ||
-      userName.value === "" ||
-      postContent.value === ""
-    ) {
-      isValid = false;
-      return isValid;
-    }
+    return (
+      elements.titleName.value !== "" &&
+      elements.userName.value !== "" &&
+      elements.postContent.value !== ""
+    );
   }
 
-  async function submitNewPost() {
-    const response = await fetch(url);
+  async function submitNewPost(event) {
+    event.preventDefault();
+
+    if (!validateFormValues()) {
+      console.log("Fill all inputs");
+      return;
+    }
+    const newPostContent = { title, username, content };
+    const response = await fetch(postsUrl, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(newPostContent),
+    });
+
+    console.log(response);
   }
 
   function getElements() {
@@ -27,14 +39,12 @@
       postButton: document.querySelector(".public"),
       cancelButton: document.querySelector(".cancel"),
     };
+
+    return elements;
   }
 
   function eventHandling() {
-    const elements = getElements();
-
-    elements.postButton.addEventListener("click", () => {
-      submitNewPost();
-    });
+    elements.postButton.addEventListener("click", submitNewPost());
 
     elements.cancelButton.addEventListener("click", () => {
       titleName.value = "";
