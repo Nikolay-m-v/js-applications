@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       monthElements.forEach((monthElement) => {
         monthElement.addEventListener("click", () => {
           const selectedMonth = monthElement.textContent.trim();
+          console.log(`${selectedMonth} clicked`);
           showDays(selectedMonth);
         });
       });
@@ -50,15 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showDays(month) {
-    const selectedMonthContainer = document.getElementById(`month-${month}`);
-    if (selectedMonthContainer) {
-      monthsContainers.forEach((monthContainer) => {
-        monthContainer.style.display = "none";
-      });
-      selectedMonthContainer.style.display = "block";
-    } else {
-      console.log(`Month container for ${month} not found.`);
-    }
+    const dayContainers = document.querySelectorAll(`${month}.days`);
+    console.log(month);
+    console.log(dayContainers);
+    dayContainers.forEach((dayContainer) => {
+      if (dayContainer.id === `month-${month}`) {
+        dayContainer.style.display = "block";
+      } else {
+        dayContainer.style.display = "none";
+      }
+    });
   }
 
   initCalendar();
