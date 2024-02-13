@@ -7,8 +7,10 @@
 
   function getElements() {
     return {
-      registerEmailInput: document.getElementById("email"),
-      registerPasswordInput: document.getElementById("password"),
+      loginEmailInput: document.getElementById("loginEmail"),
+      loginPasswordInput: document.getElementById("loginPassword"),
+      registerEmailInput: document.getElementById("registerEmail"),
+      registerPasswordInput: document.getElementById("registerPassword"),
       repeatPasswordInput: document.getElementById("repeatPassword"),
       movieTitleInput: document.getElementById("title"),
       movieDescriptionInput: document.getElementById("movieDescription"),
@@ -17,10 +19,24 @@
     };
   }
 
+  function validateInput() {
+    if (
+      elements.registerEmailInput === "" ||
+      elements.registerPasswordInput === "" ||
+      elements.repeatPasswordInput === ""
+    ) {
+      return false;
+    }
+  }
+
   function eventHandling() {
+    console.log(elements.emailInput);
     elements.submitButton[4].addEventListener("click", (event) => {
       event.preventDefault();
-      console.log("clicked rgister");
+      if (!validateInput()) {
+        console.log("Fill all inputs!");
+        return;
+      }
     });
   }
 
