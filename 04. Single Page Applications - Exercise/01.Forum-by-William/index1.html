@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Parisienne&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/3cd69e2433.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>SoftUni Forum</title>
+    <script src="./src/app.js" type="module"></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="mini-navbar-wrap">
+        <div class="logo-wrap">
+          <p class="logo"><span class="logo">SoftUni Forum</span></p>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="/" id="homeLink">Home</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main"></main>
+    <section id="homeView">
+      <div class="container">
+        <main>
+          <p id="formSubmitSuccessMessage" class="hidden">
+            <span>Topic created successfully!</span>
+          </p>
+          <div class="new-topic-border">
+            <div class="header-background">
+              <span>New Topic</span>
+            </div>
+            <form id="topicForm">
+              <div class="new-topic-title">
+                <label for="topicName">Title <span class="red">*</span></label>
+                <input type="text" name="topicName" id="topicName" required />
+              </div>
+              <div class="new-topic-title">
+                <label for="username"
+                  >Username <span class="red">*</span></label
+                >
+                <input type="text" name="username" id="username" required />
+              </div>
+              <div class="new-topic-content">
+                <label for="postText">Post <span class="red">*</span></label>
+                <textarea
+                  type="text"
+                  name="postText"
+                  id="postText"
+                  rows="8"
+                  class="height"
+                  required
+                ></textarea>
+              </div>
+              <div class="new-topic-buttons">
+                <button
+                  type="button"
+                  id="cancelTopicCreation"
+                  name="cancel"
+                  class="cancel"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  name="submit"
+                  id="submitTopic"
+                  class="public"
+                >
+                  Post
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div id="topicsContainer"></div>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>
