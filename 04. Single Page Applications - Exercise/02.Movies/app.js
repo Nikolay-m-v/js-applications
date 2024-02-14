@@ -21,11 +21,28 @@
 
   function validateInput() {
     if (
-      elements.registerEmailInput === "" ||
-      elements.registerPasswordInput === "" ||
-      elements.repeatPasswordInput === ""
+      elements.registerEmailInput.value.trim() !== "" &&
+      elements.registerPasswordInput.value.trim() !== "" &&
+      elements.repeatPasswordInput.value.trim() !== ""
     ) {
+      if (validatePassword()) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
       return false;
+    }
+  }
+
+  function validatePassword() {
+    if (
+      elements.registerPasswordInput.value.length > 5 &&
+      elements.registerPasswordInput.value ===
+        elements.repeatPasswordInput.value
+    ) {
+      console.log("Password must be atleast 6 characters long!");
+      return true;
     }
   }
 
