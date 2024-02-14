@@ -24,36 +24,22 @@
     const password = elements.registerPasswordInput.value.trim();
     const repeatPassword = elements.repeatPasswordInput.value.trim();
 
-    if (
-      elements.registerEmailInput.value.trim() !== "" &&
-      elements.registerPasswordInput.value.trim() !== "" &&
-      elements.repeatPasswordInput.value.trim() !== ""
-    ) {
-      if (validatePassword()) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
+    if (email === "" || password === "" || repeatPassword === "") {
+      console.log("Fill all inputs!");
       return false;
     }
-  }
 
-  function validatePassword() {
-    if (elements.registerPasswordInput.value.length > 5) {
-      if (
-        elements.registerPasswordInput.value ===
-        elements.repeatPasswordInput.value
-      ) {
-        return true;
-      } else {
-        console.log("Passwords do not match!");
-        return false;
-      }
-    } else {
-      console.log("Password must be atleast 6 characters long!");
+    if (password.length < 6) {
+      console.log("password must be atleast 6 characters");
       return false;
     }
+
+    if (password !== repeatPassword) {
+      console.log("passwords must match");
+      return false;
+    }
+
+    return true;
   }
 
   function eventHandling() {
@@ -61,7 +47,6 @@
     elements.submitButton[4].addEventListener("click", (event) => {
       event.preventDefault();
       if (!validateInput()) {
-        console.log("Fill all inputs!");
         return;
       }
     });
