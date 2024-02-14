@@ -20,6 +20,10 @@
   }
 
   function validateInput() {
+    const email = elements.registerEmailInput.value.trim();
+    const password = elements.registerPasswordInput.value.trim();
+    const repeatPassword = elements.repeatPasswordInput.value.trim();
+
     if (
       elements.registerEmailInput.value.trim() !== "" &&
       elements.registerPasswordInput.value.trim() !== "" &&
@@ -36,13 +40,19 @@
   }
 
   function validatePassword() {
-    if (
-      elements.registerPasswordInput.value.length > 5 &&
-      elements.registerPasswordInput.value ===
+    if (elements.registerPasswordInput.value.length > 5) {
+      if (
+        elements.registerPasswordInput.value ===
         elements.repeatPasswordInput.value
-    ) {
+      ) {
+        return true;
+      } else {
+        console.log("Passwords do not match!");
+        return false;
+      }
+    } else {
       console.log("Password must be atleast 6 characters long!");
-      return true;
+      return false;
     }
   }
 
