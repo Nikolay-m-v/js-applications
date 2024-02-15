@@ -16,6 +16,7 @@
       movieDescriptionInput: document.getElementById("movieDescription"),
       movieImageUrl: document.getElementById("imageUrl"),
       submitButton: document.querySelectorAll(".btn-primary"),
+      logoutButton: document.getElementById("logout"),
     };
   }
 
@@ -98,6 +99,16 @@
     window.location.href = "/home";
   }
 
+  function logoutUser() {
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
+
+    console.log("User Logged out successfully");
+
+    /// login not implemented yet
+    window.location.href = `${baseUrl}/data/login`;
+  }
+
   function eventHandling() {
     console.log(elements.emailInput);
     elements.submitButton[4].addEventListener("click", (event) => {
@@ -114,6 +125,11 @@
         return;
       }
       login();
+    });
+
+    elements.logoutButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      logoutUser();
     });
   }
 
