@@ -42,6 +42,27 @@
     return true;
   }
 
+  async function registerUser() {
+    const requestData = {
+      email: elements.emailInput.value.trim(),
+      password: registerPasswordInput.value.trim(),
+    };
+
+    const responseRegister = await fetch(baseUrl, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    });
+
+    const responseData = await responseRegister.json();
+
+    sessionStorage.setItem("registrationToken", responseData.token);
+    console.log(responseData);
+    return responseData;
+  }
+
   function eventHandling() {
     console.log(elements.emailInput);
     elements.submitButton[4].addEventListener("click", (event) => {
@@ -49,6 +70,7 @@
       if (!validateInput()) {
         return;
       }
+      registerUser();
     });
   }
 
