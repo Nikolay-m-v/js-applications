@@ -44,11 +44,12 @@
 
   async function registerUser() {
     const requestData = {
-      email: elements.emailInput.value.trim(),
-      password: registerPasswordInput.value.trim(),
+      email: elements.registerEmailInput.value.trim(),
+      password: elements.registerPasswordInput.value.trim(),
     };
 
-    const responseRegister = await fetch(baseUrl, {
+    /// register link does not work yet
+    const responseRegister = await fetch(moviesUrl, {
       method: "post",
       headers: {
         "Content-type": "application/json",
