@@ -19,7 +19,7 @@
     };
   }
 
-  function validateInput() {
+  function validateRegisterInput() {
     const email = elements.registerEmailInput.value.trim();
     const password = elements.registerPasswordInput.value.trim();
     const repeatPassword = elements.repeatPasswordInput.value.trim();
@@ -36,6 +36,18 @@
 
     if (password !== repeatPassword) {
       console.log("passwords must match");
+      return false;
+    }
+
+    return true;
+  }
+
+  function validateLoginInput() {
+    const email = elements.loginEmailInput.value.trim();
+    const password = elements.loginPasswordInput.value.trim();
+
+    if (email === "" || password === "") {
+      console.log("fill all inputs");
       return false;
     }
 
@@ -64,14 +76,42 @@
     return responseData;
   }
 
+  async function login() {
+    const requestData = {
+      email: elements.loginEmailInput.value.trim(),
+      password: elements.loginPasswordInput.value.trim(),
+    };
+
+    const loginResponse = await fetch(moviesUrl, {
+      method: "post",
+      headers: {
+        "Contet-type": "application/json",
+      },
+      body: JSON.stringify(requestData),
+    });
+
+    const responseData = await loginResponse.json();
+
+    sessionStorage.setItem("user", JSON.stringify(responseData.token));
+    sessionStorage.setItem("token", responseData.accessToken);
+  }
+
   function eventHandling() {
     console.log(elements.emailInput);
     elements.submitButton[4].addEventListener("click", (event) => {
       event.preventDefault();
-      if (!validateInput()) {
+      if (!validateRegisterInput()) {
         return;
       }
       registerUser();
+    });
+
+    elements.submitButton[3].addEventListener("click", (event) => {
+      event.preventDefault();
+      if (!validateLoginInput()) {
+        return;
+      }
+      login();
     });
   }
 
