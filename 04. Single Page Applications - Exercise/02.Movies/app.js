@@ -54,5 +54,3 @@
 
   eventHandling();
 })();
-
-/// fixes
