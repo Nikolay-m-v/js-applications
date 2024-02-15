@@ -94,6 +94,8 @@
 
     sessionStorage.setItem("user", JSON.stringify(responseData.token));
     sessionStorage.setItem("token", responseData.accessToken);
+
+    window.location.href = "/home";
   }
 
   function eventHandling() {
