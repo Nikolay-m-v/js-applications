@@ -55,6 +55,8 @@
     return true;
   }
 
+  function addMovie() {}
+
   async function registerUser() {
     const requestData = {
       email: elements.registerEmailInput.value.trim(),
@@ -135,3 +137,5 @@
 
   eventHandling();
 })();
+
+/// videos
