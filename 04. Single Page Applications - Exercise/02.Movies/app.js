@@ -20,8 +20,10 @@
       sectionLoginElement: document.getElementById("form-login"),
       allElementsContainer: document.getElementById("container"),
       navigationLinks: document.querySelectorAll(".nav-link"),
-      loginForm: document.getElementById("form-login"),
-      registerForm: document.getElementById("form-sign-up"),
+      loginForm: document.getElementById("formLogin"),
+      registerForm: document.getElementById("formSignUp"),
+      addMovieButton: document.getElementById("addMovieButton"),
+      addMovieSection: document.getElementById("addMovie"),
     };
   }
 
@@ -60,7 +62,23 @@
     return true;
   }
 
-  function addMovie() {}
+  async function addMovie() {
+    const movieData = {
+      movieTitle: elements.movieTitleInput.value,
+      movieDescription: elements.movieDescriptionInput.value,
+      movieImageUrl: elements.movieImageUrl.value,
+    };
+
+    const responseMovieData = await fetch(moviesUrl, {
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(movieData),
+    });
+
+    const responseData = await responseMovieData.json();
+  }
 
   async function registerUser() {
     const requestData = {
@@ -145,6 +163,10 @@
 
     elements.navigationLinks[3].addEventListener("click", () => {
       hideElements(elements.registerForm);
+    });
+
+    elements.addMovieButton.addEventListener("click", () => {
+      hideElements(elements.addMovieSection);
     });
   }
 
