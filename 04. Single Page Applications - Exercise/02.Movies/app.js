@@ -144,10 +144,11 @@
   }
 
   function hideElements(elementToRemainVisible) {
-    const containerChildren = elements.allElementsContainer;
+    const containerChildren = elements.allElementsContainer.children;
 
-    for (let i = 0; i < containerChildren.length; i++) {
-      if (containerChildren[i] !== elementToRemainVisible) {
+    for (let i = 1; i < containerChildren.length; i++) {
+      const element = containerChildren[i];
+      if (element !== elementToRemainVisible) {
         containerChildren[i].style.display = "none";
       }
     }
