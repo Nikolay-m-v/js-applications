@@ -159,6 +159,26 @@
     window.location.href = `${baseUrl}/data/login`;
   }
 
+  function hideElements(elementToRemainVisible) {
+    resetHtmlState();
+    const containerChildren = elements.allElementsContainer.children;
+
+    for (let i = 1; i < containerChildren.length; i++) {
+      const element = containerChildren[i];
+      if (element !== elementToRemainVisible) {
+        containerChildren[i].style.display = "none";
+      }
+    }
+  }
+
+  function resetHtmlState() {
+    const containerChildren = elements.allElementsContainer.children;
+
+    for (let i = 0; i < containerChildren.length; i++) {
+      containerChildren[i].style.display = "block";
+    }
+  }
+
   function eventHandling() {
     console.log(elements.emailInput);
     elements.submitButton[4].addEventListener("click", (event) => {
@@ -198,27 +218,6 @@
       event.preventDefault();
       addMovie();
     });
-  }
-
-  function hideElements(elementToRemainVisible) {
-    resetHtmlState();
-    const containerChildren = elements.allElementsContainer.children;
-    console.log(elementToRemainVisible);
-
-    for (let i = 1; i < containerChildren.length; i++) {
-      const element = containerChildren[i];
-      if (element !== elementToRemainVisible) {
-        containerChildren[i].style.display = "none";
-      }
-    }
-  }
-
-  function resetHtmlState() {
-    const containerChildren = elements.allElementsContainer.children;
-
-    for (let i = 0; i < containerChildren.length; i++) {
-      containerChildren[i].style.display = "block";
-    }
   }
 
   eventHandling();
