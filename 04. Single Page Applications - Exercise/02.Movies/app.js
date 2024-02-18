@@ -17,6 +17,10 @@
       movieImageUrl: document.getElementById("imageUrl"),
       submitButton: document.querySelectorAll(".btn-primary"),
       logoutButton: document.getElementById("logout"),
+      sectionLoginElement: document.getElementById("form-login"),
+      allElementsContainer: document.getElementById("container"),
+      navigationLinks: document.querySelectorAll(".nav-link"),
+      loginForm: document.getElementById("form-login"),
     };
   }
 
@@ -133,6 +137,20 @@
       event.preventDefault();
       logoutUser();
     });
+
+    elements.navigationLinks[2].addEventListener("click", () => {
+      hideElements(elements.loginForm);
+    });
+  }
+
+  function hideElements(elementToRemainVisible) {
+    const containerChildren = elements.allElementsContainer;
+
+    for (let i = 0; i < containerChildren.length; i++) {
+      if (containerChildren[i] !== elementToRemainVisible) {
+        containerChildren[i].style.display = "none";
+      }
+    }
   }
 
   eventHandling();
