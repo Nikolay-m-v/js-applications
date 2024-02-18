@@ -12,7 +12,7 @@
       registerEmailInput: document.getElementById("registerEmail"),
       registerPasswordInput: document.getElementById("registerPassword"),
       repeatPasswordInput: document.getElementById("repeatPassword"),
-      movieTitleInput: document.getElementById("title"),
+      movieTitleInput: document.getElementById("movieTitle"),
       movieDescriptionInput: document.getElementById("movieDescription"),
       movieImageUrl: document.getElementById("imageUrl"),
       submitButton: document.querySelectorAll(".btn-primary"),
@@ -62,7 +62,24 @@
     return true;
   }
 
+  function validateMovieInput() {
+    if (
+      elements.movieTitleInput.value === "" ||
+      elements.movieDescriptionInput.value === "" ||
+      elements.movieImageUrl.value === ""
+    ) {
+      console.log("Fill all inputs about the movie you are trying to add!");
+      return false;
+    }
+
+    return true;
+  }
+
   async function addMovie() {
+    if (!validateMovieInput()) {
+      return;
+    }
+
     const movieData = {
       movieTitle: elements.movieTitleInput.value,
       movieDescription: elements.movieDescriptionInput.value,
@@ -167,6 +184,11 @@
 
     elements.addMovieButton.addEventListener("click", () => {
       hideElements(elements.addMovieSection);
+    });
+
+    elements.submitButton[0].addEventListener("click", (event) => {
+      event.preventDefault();
+      addMovie();
     });
   }
 
