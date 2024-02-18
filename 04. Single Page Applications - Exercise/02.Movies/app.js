@@ -21,6 +21,7 @@
       allElementsContainer: document.getElementById("container"),
       navigationLinks: document.querySelectorAll(".nav-link"),
       loginForm: document.getElementById("form-login"),
+      registerForm: document.getElementById("form-sign-up"),
     };
   }
 
@@ -141,16 +142,30 @@
     elements.navigationLinks[2].addEventListener("click", () => {
       hideElements(elements.loginForm);
     });
+
+    elements.navigationLinks[3].addEventListener("click", () => {
+      hideElements(elements.registerForm);
+    });
   }
 
   function hideElements(elementToRemainVisible) {
+    resetHtmlState();
     const containerChildren = elements.allElementsContainer.children;
+    console.log(elementToRemainVisible);
 
     for (let i = 1; i < containerChildren.length; i++) {
       const element = containerChildren[i];
       if (element !== elementToRemainVisible) {
         containerChildren[i].style.display = "none";
       }
+    }
+  }
+
+  function resetHtmlState() {
+    const containerChildren = elements.allElementsContainer.children;
+
+    for (let i = 0; i < containerChildren.length; i++) {
+      containerChildren[i].style.display = "block";
     }
   }
 
