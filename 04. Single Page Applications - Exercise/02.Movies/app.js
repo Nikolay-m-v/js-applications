@@ -75,6 +75,12 @@
     return true;
   }
 
+  function resetMovieInputs() {
+    elements.movieTitleInput.value = "";
+    elements.movieDescriptionInput.value = "";
+    elements.movieImageUrl.value = "";
+  }
+
   async function addMovie() {
     if (!validateMovieInput()) {
       return;
@@ -95,6 +101,8 @@
     });
 
     const responseData = await responseMovieData.json();
+
+    resetMovieInputs();
   }
 
   async function registerUser() {
