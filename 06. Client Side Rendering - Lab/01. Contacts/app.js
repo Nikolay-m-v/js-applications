@@ -2,6 +2,8 @@
 
 import { contacts } from "./contacts.js";
 
+const root = document.querySelector("#contacts");
+
 const contactTemplate = (contact) => html`<div class="contact card">
   <div>
     <i class="far fa-user-circle gravatar"></i>
@@ -15,3 +17,18 @@ const contactTemplate = (contact) => html`<div class="contact card">
     </div>
   </div>
 </div>`;
+
+render(contacts.map(contactTemplate), root);
+
+function showDetails(event) {
+  const infoDiv = event.target.parentElement;
+  const deatilsDiv = infoDiv.querySelector(".details");
+
+  if (event.target.textContent === "Details") {
+    deatilsDiv.style.display = "block";
+    event.target.textContent = "Hide Details";
+  } else {
+    deatilsDiv.style.display = "none";
+    event.target.textContent = "Details";
+  }
+}
