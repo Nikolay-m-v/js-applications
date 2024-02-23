@@ -31,6 +31,12 @@
       let town = towns[i];
       appendTown(elements, town);
     }
+
+    clearInputValues(elements);
+  }
+
+  function clearInputValues(element) {
+    element.townsInput.value = "";
   }
 
   function createUlElement(elements) {
