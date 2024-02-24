@@ -14,10 +14,19 @@
 
 // module.exports = myFunction;
 
-function fetchData(callback) {
-  setTimeout(() => {
-    callback("peanut butter");
-  }, 1000);
+// function fetchData(callback) {
+//   setTimeout(() => {
+//     callback("peanut butter");
+//   }, 1000);
+// }
+
+// module.exports = fetchData;
+
+function fetchPromise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(`peanut butter`), 1000);
+    setTimeout(() => reject(`error rejecting`), 1000);
+  });
 }
 
-module.exports = fetchData;
+module.exports = fetchPromise;
