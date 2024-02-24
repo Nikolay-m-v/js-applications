@@ -15,4 +15,7 @@ const sum = require(`./sum`);
 //   expect(data).toEqual({ one: 1, two: 2 });
 // });
 
-test(``);
+test("null is falsy", () => {
+  const n = null;
+  expect(n).toBeFalsy();
+});
