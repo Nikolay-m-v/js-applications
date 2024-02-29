@@ -1,4 +1,4 @@
-import { getAllStudents } from "./api";
+import { getAllStudents } from "./api.js";
 import { render } from "../03.Search-in-List/node_modules/lit-html/lit-html.js";
 import { search } from "./search.js";
 import { studentsTemplate } from "./studentsTemplate.js";
