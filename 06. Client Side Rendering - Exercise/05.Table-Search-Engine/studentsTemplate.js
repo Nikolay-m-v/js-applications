@@ -1,4 +1,4 @@
-import { html } from "./node_modules/lit-html/lit-html.js";
+import { html } from "../03.Search-in-List/node_modules/lit-html/lit-html.js";
 
 export const studentsTemplate = (studentsData) => html`
   ${studentsData.map(
