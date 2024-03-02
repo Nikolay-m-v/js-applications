@@ -17,8 +17,9 @@ import {
     Object.values(data).forEach((entry) => {
       console.log(entry);
       const tableRow = createTableHtmlTemplate(entry);
-      appendElements(tableRow);
+      appendRenderedElements(tableRow);
     });
+    addBookForm();
   }
 
   function createTableHtmlTemplate(data) {
@@ -42,7 +43,7 @@ import {
     return tableRow;
   }
 
-  function appendElements(elementToAppend) {
+  function appendRenderedElements(elementToAppend) {
     const container = document.createElement("div");
     render(elementToAppend, container);
 
@@ -51,7 +52,42 @@ import {
     document.body.appendChild(renderedNode);
   }
 
-  function getElements() {}
+  function addBookForm() {
+    const form = document.createElement("form");
+    form.id = "add-form";
+
+    const h3Element = document.createElement("h3");
+    h3Element.textContent = "Add book";
+
+    const labelTitleElement = document.createElement("label");
+    labelTitleElement.textContent = "TITLE";
+
+    const inputTitleELement = document.createElement("input");
+    inputTitleELement.type = "text";
+    inputTitleELement.name = "title";
+    inputTitleELement.placeholder = "Title...";
+
+    const labelAuthorElement = document.createElement("label");
+    labelAuthorElement.textContent = "AUTHOR";
+
+    const inputAuthorElement = document.createElement("input");
+    inputAuthorElement.type = "text";
+    inputAuthorElement.name = "author";
+    inputAuthorElement.placeholder = "Author...";
+
+    const inputSubmitElement = document.createElement("input");
+    inputSubmitElement.type = "submit";
+    inputSubmitElement.value = "Submit";
+
+    form.appendChild(h3Element);
+    form.appendChild(labelTitleElement);
+    form.appendChild(inputTitleELement);
+    form.appendChild(labelAuthorElement);
+    form.appendChild(inputAuthorElement);
+    form.appendChild(inputSubmitElement);
+
+    document.body.appendChild(form);
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     const loadAllBooksButton = document.createElement("button");
