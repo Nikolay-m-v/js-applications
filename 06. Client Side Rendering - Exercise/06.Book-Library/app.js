@@ -1,18 +1,27 @@
 "use strict";
 
-import { render } from "../03.Search-in-List/node_modules/lit-html/lit-html.js";
+import {
+  render,
+  html,
+} from "../03.Search-in-List/node_modules/lit-html/lit-html.js";
 
 (function main() {
   let url = `http://localhost:3030/jsonstore/collections/books`;
 
   async function loadAllElements() {
     const response = await fetch(url);
-
     const data = await response.json();
-    createHtmlTemplate(data);
+
+    console.log(data);
+
+    Object.values(data).forEach((entry) => {
+      console.log(entry);
+      const tableRow = createTableHtmlTemplate(entry);
+      appendElements(tableRow);
+    });
   }
 
-  function createHtmlTemplate(data) {
+  function createTableHtmlTemplate(data) {
     const tableRow = html`<table>
       <thead>
         <tr>
@@ -33,9 +42,25 @@ import { render } from "../03.Search-in-List/node_modules/lit-html/lit-html.js";
     return tableRow;
   }
 
+  function appendElements(elementToAppend) {
+    const container = document.createElement("div");
+    render(elementToAppend, container);
+
+    const renderedNode = container.firstElementChild;
+
+    document.body.appendChild(renderedNode);
+  }
+
   function getElements() {}
 
   document.addEventListener("DOMContentLoaded", () => {
-    loadAllElements();
+    const loadAllBooksButton = document.createElement("button");
+    loadAllBooksButton.id = "loadBooks";
+    loadAllBooksButton.textContent = "LOAD ALL BOOKS";
+    document.body.appendChild(loadAllBooksButton);
+
+    loadAllBooksButton.addEventListener("click", () => {
+      loadAllElements();
+    });
   });
 })();
