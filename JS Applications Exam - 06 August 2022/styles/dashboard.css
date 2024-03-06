@@ -53,3 +53,18 @@ h2 {
   padding: 10px;
   margin: auto;
 }
+
+.image-wrapper {
+  display: flex;
+  margin-top: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-job {
+  width: 400px;
+}
+
+.image-wrapper p {
+  font-family: sans-serif;
+}
