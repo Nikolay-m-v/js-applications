@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <header>
+    <!-- Navigation -->
+    <a id="logo" href="/"
+      ><img id="logo-img" src="./images/logo.jpg" alt=""
+    /></a>
+
+    <nav>
+      <div>
+        <a href="/catalog">Dashboard</a>
+      </div>
+
+      <!-- Logged-in users -->
+      <div class="user">
+        <a href="/create">Create Offer</a>
+        <a id="logoutBtn" href="javascript:void(0)">Logout</a>
+      </div>
+
+      <!-- Guest users -->
+      <div class="guest">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      </div>
+    </nav>
+  </header>
+  <body>
+    <div class="login-wrapper">
+      <div class="form-container">
+        <h3>Login</h3>
+        <input
+          type="text"
+          id="email"
+          class="email"
+          name="email"
+          placeholder="email"
+        />
+        <input
+          type="text"
+          id="password"
+          name="password"
+          placeholder="password"
+          class="password"
+        />
+        <input type="submit" value="Login" class="login-button" />
+      </div>
+    </div>
+  </body>
+</html>
