@@ -4,6 +4,7 @@ const login = (function main() {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const loginButton = document.getElementById("loginButton");
+  const url = ``;
 
   loginButton.addEventListener("click", (event) => {
     event.preventDefault();
