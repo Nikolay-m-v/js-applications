@@ -1,8 +1,6 @@
 "use strict";
 
-const { log } = require("console");
-
-(function main() {
+const login = (function main() {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const loginButton = document.getElementById("loginButton");
@@ -35,3 +33,5 @@ const { log } = require("console");
     });
   }
 })();
+
+export { main };
