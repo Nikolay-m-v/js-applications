@@ -1,9 +1,16 @@
 "use strict";
 
+const { log } = require("console");
+
 (function main() {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const loginButton = document.getElementById("loginButton");
+
+  loginButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    loginUser();
+  });
 
   function checkInputValues() {
     if (emailInput.value === "" || passwordInput.value === "") {
@@ -24,7 +31,7 @@
       headers: {
         "Content-type": "application/json",
       },
-      body: userData,
+      body: JSON.stringify(userData),
     });
   }
 })();
