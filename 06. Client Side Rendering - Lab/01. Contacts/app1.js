@@ -11,7 +11,7 @@ const contactTemplate = (contact) => html`<div class="contact card">
     <h2>Name: ${contact.name}</h2>
     <button @click=${showDetails} class="detailsBtn">Details</button>
     <div class="details" id="${contact.id}">
-      <p>Phone Number: ${contact.phoneNumer}></p>
+      <p>Phone Number: ${contact.phoneNumber}</p>
       <p>Email: ${contact.email}</p>
     </div>
   </div>
