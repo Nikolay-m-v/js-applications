@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Nikolay-m-v/js-applications#readme",
   "devDependencies": {
     "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "lit-html": "^3.1.2"
   }
 }
