@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let main = document.getElementById("menu");
 
-  let cardTemplate = html`${items.map((item) => {
-    html`<option value=${item._id}>${item.text}</option>`;
-  })}`;
+  let cardTemplate = html`${items.map(
+    (item) => html`<option value=${item._id}>${item.text}</option>`
+  )}`;
 
   render(cardTemplate, main);
 
@@ -52,5 +52,4 @@ document.addEventListener("DOMContentLoaded", async () => {
       render(cardTemplate, main);
     }
   }
-  getAllItems();
 });
