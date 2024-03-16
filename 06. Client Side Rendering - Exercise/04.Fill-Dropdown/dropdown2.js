@@ -12,7 +12,35 @@ async function getAllItems() {
 
   const data = await response.json();
 
-  Object.values(data).forEach((entry) => {});
+  return data;
+}
+
+let items = Object.values(await getAllItems());
+
+let cardTemplate = html`${items.map((item) => {
+  html`<option value=${item._id}>${item.text}</option>`;
+})}`;
+
+render(cardTemplate);
+
+document
+  .querySelector('input[type="submit"]')
+  .addEventListener("click", addItem);
+
+async function addItem(event) {
+  event.preventDefault();
+
+  let text = document.getElementById("itemText").value;
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ text }),
+  });
+
+  let data = await response.json();
+
+  items.push(data);
 }
 
 getAllItems();
