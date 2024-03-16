@@ -41,6 +41,13 @@ async function addItem(event) {
   let data = await response.json();
 
   items.push(data);
+
+  if (response.ok) {
+    cardTemplate = html`${items.map(
+      (item) => html`<option value=${item._id}>${item.text}</option>`
+    )}`;
+    render(cardTemplate, main);
+  }
 }
 
 getAllItems();
