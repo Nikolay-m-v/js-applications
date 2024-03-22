@@ -19,6 +19,15 @@ import {
     addBookForm();
   }
 
+  // function editBook(entry) {
+  //   let titleForm = document.getElementById("title");
+  //   let authorForm = document.getElementById("author");
+  //   titleForm.value = entry.title;
+  //   authorForm.value = entry.author;
+  // }
+
+  // editBook();
+
   function createTableHtmlTemplate(data) {
     const tableRow = html`<table>
       <thead>
@@ -32,7 +41,10 @@ import {
         <tr>
           <td>${data.title}</td>
           <td>${data.author}</td>
-          <td><button>Edit</button> <button>Delete</button></td>
+          <td>
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>`;
@@ -63,6 +75,7 @@ import {
     inputTitleELement.type = "text";
     inputTitleELement.name = "title";
     inputTitleELement.placeholder = "Title...";
+    inputTitleELement.id = "title";
 
     const labelAuthorElement = document.createElement("label");
     labelAuthorElement.textContent = "AUTHOR";
@@ -71,6 +84,7 @@ import {
     inputAuthorElement.type = "text";
     inputAuthorElement.name = "author";
     inputAuthorElement.placeholder = "Author...";
+    inputAuthorElement.id = "author";
 
     const inputSubmitElement = document.createElement("input");
     inputSubmitElement.type = "submit";
@@ -86,7 +100,8 @@ import {
     document.body.appendChild(form);
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", (event) => {
+    event.preventDefault();
     const loadAllBooksButton = document.createElement("button");
     loadAllBooksButton.id = "loadBooks";
     loadAllBooksButton.textContent = "LOAD ALL BOOKS";
@@ -94,6 +109,17 @@ import {
 
     loadAllBooksButton.addEventListener("click", () => {
       loadAllElements();
+    });
+
+    document.body.addEventListener("click", (event) => {
+      if (event.target.classList.contains("edit-btn")) {
+        const tableRow = event.target.closest("tr");
+        const title = tableRow.querySelector("td:nth-child(1)").textContent;
+        const author = tableRow.querySelector("td:nth-child(2)").textContent;
+
+        document.getElementById("title").value = title;
+        document.getElementById("author").value = author;
+      }
     });
   });
 })();
