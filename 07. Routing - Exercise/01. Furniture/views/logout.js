@@ -1,4 +1,4 @@
-import page from "../03.Search-in-List/node_modules/page/page.mjs";
+import page from "../node_modules/page/page.mjs";
 import { updateInfo } from "../app.js";
 
 export const logout = () => {

@@ -1,9 +1,5 @@
-import page from "../03.Search-in-List/node_modules/page/page.mjs";
-import {
-  html,
-  render,
-} from "../03.Search-in-List/node_modules/lit-html/lit-html.js";
-
+import page from "../node_modules/page/page.mjs";
+import { html, render } from "../node_modules/lit-html/lit-html.js";
 const detailsTemplate = (furniture) => html`
   <div class="row space-top">
     <div class="col-md-12">

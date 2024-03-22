@@ -1,8 +1,5 @@
 import page from "../03.Search-in-List/node_modules/page/page.mjs";
-import {
-  html,
-  render,
-} from "../03.Search-in-List/node_modules/lit-html/lit-html.js";
+import { html, render } from "../node_modules/lit-html/lit-html.js";
 import { updateInfo } from "../app.js";
 
 let loginTemplate = () => html`
