@@ -1,5 +1,3 @@
-import { table } from "console";
-
 export function search() {
   let tableRows = document.querySelector(".container tbody").children;
   let input = document.querySelector("#searchField");
