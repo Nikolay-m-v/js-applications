@@ -13,7 +13,6 @@ import {
     const data = await response.json();
 
     Object.values(data).forEach((entry) => {
-      console.log(entry);
       const tableRow = createTableHtmlTemplate(entry);
       appendRenderedElements(tableRow);
     });
