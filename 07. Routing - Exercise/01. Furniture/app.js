@@ -32,3 +32,12 @@ export const updateInfo = () => {
   }
 };
 updateInfo();
+
+async function getAllFurniture() {
+  const allFurnitureUrl = `http://localhost:3030/data/catalog`;
+  const response = await fetch(allFurnitureUrl);
+  const data = await response.json();
+  console.log(data);
+}
+
+getAllFurniture();
