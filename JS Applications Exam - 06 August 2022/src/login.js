@@ -1,6 +1,5 @@
 "use strict";
-
-const login = (function main() {
+function login() {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const loginButton = document.getElementById("loginButton");
@@ -33,6 +32,6 @@ const login = (function main() {
       body: JSON.stringify(userData),
     });
   }
-})();
+}
 
-export { main };
+export { login };
