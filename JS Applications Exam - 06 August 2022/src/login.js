@@ -3,7 +3,7 @@ function login() {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const loginButton = document.getElementById("loginButton");
-  const url = ``;
+  const url = `/users/login`;
 
   loginButton.addEventListener("click", (event) => {
     event.preventDefault();
