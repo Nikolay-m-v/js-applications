@@ -33,3 +33,5 @@ function showDetails(event) {
     event.target.textContent = "Details";
   }
 }
+
+//// videos lectures
