@@ -34,4 +34,4 @@ function showDetails(event) {
   }
 }
 
-//// videos lectures //// more
+//// session with william about npm
