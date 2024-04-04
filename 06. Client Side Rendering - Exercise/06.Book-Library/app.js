@@ -123,5 +123,3 @@ import {
     });
   });
 })();
-
-/// lectures // more lectures
