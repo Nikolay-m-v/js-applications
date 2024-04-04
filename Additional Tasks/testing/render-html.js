@@ -1,6 +1,6 @@
 "use strict";
 
-import { render, html } from "../../";
+import { html, render } from "./node_modules/lit-html/lit-html.js";
 
 const cardTemplate = (card) => html`<div class="contact-card">
   <ul>
