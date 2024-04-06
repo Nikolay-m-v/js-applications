@@ -32,4 +32,4 @@ function onLogout(ctx) {
   ctx.page.redirect("/catalog");
 }
 
-/// node modules
+/// node modules lectures
