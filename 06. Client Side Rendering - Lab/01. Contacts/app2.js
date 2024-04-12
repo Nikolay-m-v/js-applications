@@ -6,12 +6,10 @@ import { contacts } from "./contacts.js";
 const mainElements = document.querySelector("#contacts");
 
 const contactTemplate = (contact) => html`<div class="contact card">
-  <div>
-    <i class="far fa-user-circle gravatar"></i>
-  </div>
+  <div><i class="far fa-user-circle gravatar"></i></div>
   <div class="info">
     <h2>Name: ${contact.name}</h2>
-    <button class="detailsBtn">Details</button>
+    <button @click=${showDetails} class="detailsBtn">Details</button>
     <div class="details" id="1">
       <p>Phone Number ${contact.phone}</p>
       <p>Email ${contact.email}</p>
@@ -23,7 +21,7 @@ render(contacts.map(contactTemplate), mainElements);
 
 function showDetails(event) {
   const infoDiv = event.target.parentElement;
-  const detailsDiv = infoDiv.querySelector(".data");
+  const detailsDiv = infoDiv.querySelector(".details");
 
   if ((event.target.textContent = "Details")) {
     detailsDiv.style.display = "block";
