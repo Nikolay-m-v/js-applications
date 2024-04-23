@@ -25,6 +25,8 @@ async function loadBooks(event) {
     appendRenderedElements(tableRow);
   });
 
+  addBookForm();
+
   function createTableHtmlTemplate(data) {
     const tableRow = html`<table>
       <thead>
@@ -66,12 +68,25 @@ async function loadBooks(event) {
     titleInputElement.id = "title";
 
     const authorTitleElement = document.createElement("label");
-    labelTitleElement.textContent = "AUTHOR";
+    authorTitleElement.textContent = "AUTHOR";
 
     const authorInputElement = document.createElement("input");
     authorInputElement.type = "text";
     authorInputElement.name = "author";
     authorInputElement.placeholder = "Author...";
+
+    const inputSubmitElement = document.createElement("input");
+    inputSubmitElement.type = "submit";
+    inputSubmitElement.value = "Submit";
+
+    form.appendChild(h3Element);
+    form.appendChild(labelTitleElement);
+    form.appendChild(titleInputElement);
+    form.appendChild(authorTitleElement);
+    form.appendChild(authorInputElement);
+    form.appendChild(inputSubmitElement);
+
+    document.body.appendChild(form);
   }
 
   function editBook() {}
