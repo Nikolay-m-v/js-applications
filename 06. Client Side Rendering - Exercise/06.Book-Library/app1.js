@@ -64,6 +64,14 @@ async function loadBooks(event) {
     titleInputElement.name = "title";
     titleInputElement.placeholder = "Title...";
     titleInputElement.id = "title";
+
+    const authorTitleElement = document.createElement("label");
+    labelTitleElement.textContent = "AUTHOR";
+
+    const authorInputElement = document.createElement("input");
+    authorInputElement.type = "text";
+    authorInputElement.name = "author";
+    authorInputElement.placeholder = "Author...";
   }
 
   function editBook() {}
