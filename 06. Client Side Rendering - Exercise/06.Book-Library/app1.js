@@ -20,10 +20,27 @@ async function loadBooks(event) {
   const response = await fetch(booksUrl);
 
   const data = await response.json();
-  Object.values(data).forEach((entry) => {
-    const tableRow = createTableHtmlTemplate(entry);
-    appendRenderedElements(tableRow);
-  });
+  const tableRows = Object.values(data).map(createTableHtmlTemplate);
+  const bookTable = html`
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableRows}
+      </tbody>
+    </table>
+  `;
+  // bject.values(data).forEach((entry) => {
+  //   const tableRow = createTableHtmlTemplate(entry);
+  //   appendRenderedElements(tableRow);
+  // });
+
+  render(bookTable, root);
 
   addBookForm();
 
@@ -90,15 +107,15 @@ async function loadBooks(event) {
     document.body.appendChild(form);
   }
 
-  document.querySelector(".edit-button").addEventListener("click", () => {});
-
   submitButtonForm.addEventListener("click", submitBook);
 
   function submitBook(event) {
     event.preventDefault();
   }
 
-  function editBook() {}
+  // document.querySelector(".edit-button").addEventListener("click", () => {});
+
+  // function editBook() {}
 
   function appendRenderedElements(elementToAppend) {
     const container = document.createElement("div");
