@@ -22,6 +22,7 @@ async function loadBooks(event) {
   const data = await response.json();
   Object.values(data).forEach((entry) => {
     const tableRow = createTableHtmlTemplate(entry);
+    appendRenderedElements(tableRow);
   });
 
   function createTableHtmlTemplate(data) {
@@ -46,5 +47,24 @@ async function loadBooks(event) {
     </table>`;
 
     return tableRow;
+  }
+
+  function addBookForm() {
+    const form = document.createElement("form");
+    form.id = "add-form";
+
+    const h3Element = document.createElement("h3");
+    h3Element.textContent = "Add book";
+  }
+
+  function editBook() {}
+
+  function appendRenderedElements(elementToAppend) {
+    const container = document.createElement("div");
+    render(elementToAppend, container);
+
+    const renderedElementNode = container.firstElementChild;
+
+    document.body.appendChild(renderedElementNode);
   }
 }
