@@ -78,6 +78,7 @@ async function loadBooks(event) {
     const inputSubmitElement = document.createElement("input");
     inputSubmitElement.type = "submit";
     inputSubmitElement.value = "Submit";
+    inputSubmitElement.id = "submitButtonForm";
 
     form.appendChild(h3Element);
     form.appendChild(labelTitleElement);
@@ -87,6 +88,14 @@ async function loadBooks(event) {
     form.appendChild(inputSubmitElement);
 
     document.body.appendChild(form);
+  }
+
+  document.querySelector(".edit-button").addEventListener("click", () => {});
+
+  submitButtonForm.addEventListener("click", submitBook);
+
+  function submitBook(event) {
+    event.preventDefault();
   }
 
   function editBook() {}
