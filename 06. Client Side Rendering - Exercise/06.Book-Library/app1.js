@@ -55,6 +55,15 @@ async function loadBooks(event) {
 
     const h3Element = document.createElement("h3");
     h3Element.textContent = "Add book";
+
+    const labelTitleElement = document.createElement("label");
+    labelTitleElement.textContent = "TITLE";
+
+    const titleInputElement = document.createElement("input");
+    titleInputElement.type = "text";
+    titleInputElement.name = "title";
+    titleInputElement.placeholder = "Title...";
+    titleInputElement.id = "title";
   }
 
   function editBook() {}
