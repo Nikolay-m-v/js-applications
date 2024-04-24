@@ -45,28 +45,41 @@ async function loadBooks(event) {
   addBookForm();
 
   function createTableHtmlTemplate(data) {
-    const tableRow = html`<table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>${data.author}</td>
-          <td>${data.title}</td>
-          <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>`;
-
-    return tableRow;
+    return html`
+      <tr>
+        <td>${data.title}</td>
+        <td>${data.author}</td>
+        <td>
+          <button @click=${() => editBook(data)}>Edit</button>
+          <button @click=${() => deleteBook(data)}>Delete</button>
+        </td>
+      </tr>
+    `;
   }
+
+  // function createTableHtmlTemplate(data) {
+  //   const tableRow = html`<table>
+  //     <thead>
+  //       <tr>
+  //         <th>Title</th>
+  //         <th>Author</th>
+  //         <th>Action</th>
+  //       </tr>
+  //     </thead>
+  //     <tbody>
+  //       <tr>
+  //         <td>${data.author}</td>
+  //         <td>${data.title}</td>
+  //         <td>
+  //           <button class="edit-btn">Edit</button>
+  //           <button class="delete-btn">Delete</button>
+  //         </td>
+  //       </tr>
+  //     </tbody>
+  //   </table>`;
+
+  //   return tableRow;
+  // }
 
   function addBookForm() {
     const form = document.createElement("form");
@@ -126,3 +139,5 @@ async function loadBooks(event) {
     document.body.appendChild(renderedElementNode);
   }
 }
+
+/// working on solutions
