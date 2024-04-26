@@ -35,10 +35,6 @@ async function loadBooks(event) {
       </tbody>
     </table>
   `;
-  // bject.values(data).forEach((entry) => {
-  //   const tableRow = createTableHtmlTemplate(entry);
-  //   appendRenderedElements(tableRow);
-  // });
 
   render(bookTable, root);
 
@@ -56,30 +52,6 @@ async function loadBooks(event) {
       </tr>
     `;
   }
-
-  // function createTableHtmlTemplate(data) {
-  //   const tableRow = html`<table>
-  //     <thead>
-  //       <tr>
-  //         <th>Title</th>
-  //         <th>Author</th>
-  //         <th>Action</th>
-  //       </tr>
-  //     </thead>
-  //     <tbody>
-  //       <tr>
-  //         <td>${data.author}</td>
-  //         <td>${data.title}</td>
-  //         <td>
-  //           <button class="edit-btn">Edit</button>
-  //           <button class="delete-btn">Delete</button>
-  //         </td>
-  //       </tr>
-  //     </tbody>
-  //   </table>`;
-
-  //   return tableRow;
-  // }
 
   function addBookForm() {
     const form = document.createElement("form");
@@ -120,15 +92,16 @@ async function loadBooks(event) {
     document.body.appendChild(form);
   }
 
+  function editBook(data) {
+    const bookTitle = document.getElementById("title");
+    bookTitle.textContent = data.title;
+  }
+
   submitButtonForm.addEventListener("click", submitBook);
 
   function submitBook(event) {
     event.preventDefault();
   }
-
-  // document.querySelector(".edit-button").addEventListener("click", () => {});
-
-  // function editBook() {}
 
   function appendRenderedElements(elementToAppend) {
     const container = document.createElement("div");
@@ -139,5 +112,33 @@ async function loadBooks(event) {
     document.body.appendChild(renderedElementNode);
   }
 }
+
+// document.querySelector(".edit-button").addEventListener("click", () => {});
+
+// function editBook() {}
+
+// function createTableHtmlTemplate(data) {
+//   const tableRow = html`<table>
+//     <thead>
+//       <tr>
+//         <th>Title</th>
+//         <th>Author</th>
+//         <th>Action</th>
+//       </tr>
+//     </thead>
+//     <tbody>
+//       <tr>
+//         <td>${data.author}</td>
+//         <td>${data.title}</td>
+//         <td>
+//           <button class="edit-btn">Edit</button>
+//           <button class="delete-btn">Delete</button>
+//         </td>
+//       </tr>
+//     </tbody>
+//   </table>`;
+
+//   return tableRow;
+// }
 
 /// working on solutions
