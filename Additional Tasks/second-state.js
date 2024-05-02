@@ -115,3 +115,5 @@ function renderCreateBookForm(containerElement) {
 
 renderLoadBooksButton(document.getElementById("actions"));
 renderCreateBookForm(document.getElementById("add-books-form-container"));
+
+//// lectures and help
