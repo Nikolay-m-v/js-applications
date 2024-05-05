@@ -47,14 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
         </tr>
       </thead>
       <tbody>
-        ${Object.values(state.books).map((book) => renderBookRow(book))}
+        ${Object.values(state.books).map((book, index) =>
+          renderBookRow(book, index)
+        )}
       </tbody>
     </table>`;
 
     render(booksTableTemplate, containerElement);
 
     const booksTable = document.getElementById("books-table");
-    console.log(booksTable);
     booksTable.addEventListener("click", handleTableButtonClick);
   }
 
