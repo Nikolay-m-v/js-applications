@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button @click="${() => editBook(index)}">Edit</button>
+        <button @click="${() => deleteBook(index)}">Delete</button>
       </td>
     </tr>`;
   }
@@ -52,6 +52,24 @@ document.addEventListener("DOMContentLoaded", () => {
     </table>`;
 
     render(booksTableTemplate, containerElement);
+
+    const booksTable = document.getElementById("books-table");
+    booksTable.addEventListener("click", handleTableButtonClick);
+  }
+
+  function handleTableButtonClick(event) {
+    const target = event.target;
+
+    if (target.tagName === "BUTTON") {
+      const action = target.textContent;
+      const rowIndex = target.closest("tr").getAttribute("data.index");
+
+      if (action === "Edit") {
+        editBook(rowIndex);
+      } else if (action === "Delete") {
+        deleteBook(rowIndex);
+      }
+    }
   }
 
   async function loadAndRenderBooks() {
