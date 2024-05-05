@@ -47,9 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </tr>
       </thead>
       <tbody>
-        ${Object.values(state.books).map((book, index) =>
-          renderBookRow(book, index)
-        )}
+        ${Object.values(state.books).map((book) => renderBookRow(book))}
       </tbody>
     </table>`;
 
@@ -77,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function editBook(index) {
     const book = state.book[index];
     document.getElementById("title").value = book.title;
-    document.getElementById("author").value = book.author;
+    document.getElementById("author").value = book.title;
   }
 
   async function loadAndRenderBooks() {
