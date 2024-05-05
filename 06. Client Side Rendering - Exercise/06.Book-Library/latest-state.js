@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     render(booksTableTemplate, containerElement);
 
     const booksTable = document.getElementById("books-table");
+    console.log(booksTable);
     booksTable.addEventListener("click", handleTableButtonClick);
   }
 
