@@ -15,8 +15,18 @@ function renderCard() {
 
 document.getElementById("searchButton").addEventListener("click", search);
 
+function checkInput() {
+  if (searchText.value === "") {
+    return false;
+  }
+  return true;
+}
+
 function search() {
   const searchText = document.getElementById("searchText").value.toLowerCase();
+  if (!checkInput(searchText)) {
+    return;
+  }
 
   const result = towns.filter((town) =>
     town.toLowerCase().includes(searchText)
