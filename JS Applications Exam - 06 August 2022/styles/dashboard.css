@@ -53,3 +53,14 @@ h2 {
   padding: 10px;
   margin: auto;
 }
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-links a {
+  color: #5c9596;
+}
