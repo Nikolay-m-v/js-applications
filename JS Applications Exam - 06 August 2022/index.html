@@ -5,62 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=\, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/styles.css" />
+    <script src="/src/app.js" type="module"></script>
     <title>ClearCareer</title>
-    <script src="./src/app.js" type="module"></script>
   </head>
   <body>
     <div id="wrapper">
       <header>
-        <!-- Navigation -->
-        <a id="logo" href="/"
-          ><img id="logo-img" src="./images/logo.jpg" alt=""
-        /></a>
-
-        <nav>
-          <div>
-            <a href="/catalog">Dashboard</a>
+        <div class="navigation">
+          <div class="nav-logo-conainer">
+            <a href="./images/logo.jpg"
+              ><img
+                src="./images/logo.jpg"
+                alt="logo of Clear Career"
+                class="logo-img"
+            /></a>
           </div>
-
-          <!-- Logged-in users -->
-          <div class="user">
-            <a href="/create">Create Offer</a>
-            <a id="logoutBtn" href="javascript:void(0)">Logout</a>
-          </div>
-
-          <!-- Guest users -->
-          <div class="guest">
-            <a href="./login.html">Login</a>
-            <a href="./register.html">Register</a>
-          </div>
-        </nav>
+          <div class="nav-links"></div>
+        </div>
       </header>
 
-      <main class="main-wrapper">
-        <div class="image-wrapper">
-          <img
-            src="./images/pngkey.com-hunting-png-6697165-removebg-preview.png"
-            alt="looking for a job?"
-            class="image-job"
-          />
-        </div>
-        <div class="job-quote">
-          <p>Searching for a job?</p>
-          <p>The right place for a new career start!</p>
-        </div>
-        <!-- Home page -->
-
-        <!-- Dashboard page -->
-
-        <!-- Register Page (Only for Guest users) -->
-
-        <!-- Login Page (Only for Guest users) -->
-
-        <!-- Create Page (Only for logged-in users) -->
-
-        <!-- Details page -->
-
-        <!-- Edit Page (Only for logged-in users) -->
-      </main>
+      <main></main>
     </div>
     <footer>
       <p>@ClearCareer</p>
