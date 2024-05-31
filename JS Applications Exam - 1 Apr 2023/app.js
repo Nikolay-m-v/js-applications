@@ -2,6 +2,8 @@
 
 import { html, render } from "./node_modules/lit-html/lit-html.js";
 
+const headerElement = document.querySelector("header");
+
 function renderNavBar() {
   const navBar = html`<div id="logoContainer">
     <a href="placeholder" 
@@ -14,4 +16,8 @@ function renderNavBar() {
     <a href="placeholder">Add Fruit</a>
     <a href="placeholder">Logout</a>
   </div>`;
+
+  return navBar;
 }
+
+render(renderNavBar, headerElement);
