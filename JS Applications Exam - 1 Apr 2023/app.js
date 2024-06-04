@@ -6,6 +6,7 @@ const headerElement = document.querySelector("header");
 const mainPageElement = document.querySelector("main");
 
 function getSessionToken() {
+  console.log(localStorage.getItem("sessionToken"));
   return localStorage.getItem("sessionToken");
 }
 
@@ -14,7 +15,7 @@ const isLoggedIn = !!sessionToken;
 
 function renderNavBar() {
   const navBar = html` <div id="logoContainer">
-      <a href="placeholder">
+      <a href="main page" @click=${renderMainPage()}>
         <img
           src="./images/logo.png"
           alt="fruitpedia logo"
@@ -29,7 +30,7 @@ function renderNavBar() {
       <a href="placeholder">Add Fruit</a>
       ${isLoggedIn
         ? html`<a href="placeholder" @click=${logout}>Logout</a>`
-        : html`<a href="placeholder">Login</a>`}
+        : html`<a href="placeholder" @click=${renderLoginPage}>Login</a>`}
     </nav>`;
 
   render(navBar, headerElement);
@@ -111,6 +112,7 @@ async function login(event) {
   if (response.ok) {
     const data = await response.json();
     console.log("login successful");
+    renderMainPage();
   } else {
     console.log("login failed");
   }
@@ -119,6 +121,3 @@ async function login(event) {
 function createAccount() {}
 
 renderNavBar();
-renderMainPage();
-renderCreateAccountPage();
-renderLoginPage();
