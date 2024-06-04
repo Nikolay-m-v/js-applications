@@ -48,7 +48,7 @@ function renderMainPage() {
 function renderLoginPage() {
   const loginPage = html` <form class="form">
     <h2>Login</h2>
-    <input type="text" name="username" placeholder="email" />
+    <input type="text" name="email" placeholder="email" />
     <input type="text" name="password" placeholder="password" />
     <button type="submit" @click=${login}>Login</button>
     <div class="message">
@@ -60,7 +60,24 @@ function renderLoginPage() {
   render(loginPage, mainPageElement);
 }
 
-async function login() {
+function checkInputValues() {
+  const email = document.querySelector('input[name="email"]').value;
+  const password = document.querySelector('input[name="password"]').value;
+
+  if (!email || !password) {
+    alert("fill all fields");
+    return false;
+  }
+  return true;
+}
+
+async function login(event) {
+  event.preventDefault();
+
+  if (!checkInputValues()) {
+    return;
+  }
+
   const url = "http://localhost:3000/";
 
   await fetch(url, {
@@ -68,6 +85,10 @@ async function login() {
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      email: document.querySelector(`input[name="email"]`).value,
+      password: document.querySelector(`input[name="password"]`).value,
+    }),
   });
 }
 
