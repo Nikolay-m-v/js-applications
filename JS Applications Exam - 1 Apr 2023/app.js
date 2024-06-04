@@ -80,7 +80,7 @@ async function login(event) {
 
   const url = "http://localhost:3000/";
 
-  await fetch(url, {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -90,6 +90,13 @@ async function login(event) {
       password: document.querySelector(`input[name="password"]`).value,
     }),
   });
+
+  if (response.ok) {
+    const data = await response.json();
+    console.log("login successful");
+  } else {
+    console.log("login failed");
+  }
 }
 
 function createAccount() {}
