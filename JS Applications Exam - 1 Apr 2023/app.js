@@ -8,10 +8,10 @@ function getSessionToken() {
   return localStorage.getItem("sessionToken");
 }
 
-function renderNavBar() {
-  const sessionToken = getSessionToken();
-  const isLoggedIn = !!sessionToken;
+const sessionToken = getSessionToken();
+const isLoggedIn = !!sessionToken;
 
+function renderNavBar() {
   const navBar = html` <div id="logoContainer">
       <a href="placeholder">
         <img
@@ -34,4 +34,26 @@ function renderNavBar() {
   render(navBar, headerElement);
 }
 
+function renderPage() {
+  const mainPageElement = document.querySelector("main");
+  const mainPage = html` <div id="mainWrapper">
+    <h2>Learn More About Your Favorite Fruits</h2>
+    <img src="./images/pexels-pixabay-161559-dImkWBDHz-transformed (1).png"
+  </div>`;
+
+  render(mainPage, mainPageElement);
+}
+
+async function login() {
+  const url = "http://localhost:3000/";
+
+  await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}
+
 renderNavBar();
+renderPage();
