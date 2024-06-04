@@ -53,11 +53,28 @@ function renderLoginPage() {
     <button type="submit" @click=${login}>Login</button>
     <div class="message">
       <span>Not registered?</span>
-      <a @click=${createAccount}>Create an account</a>
+      <a @click=${renderCreateAccountPage}>Create an account</a>
     </div>
   </form>`;
 
   render(loginPage, mainPageElement);
+}
+
+function renderCreateAccountPage() {
+  const accountPage = html`
+  <form class="form">
+    <h2>Create Account</h2>
+    <input type="text" name="email" placeholder="email"></input>
+    <input type="password" name="password" placeholder="password"></input>
+    <input type="password" name="password" placeholder="repeat password"></input>
+    <button type"submit">Create Account</button>
+    <div class="message">
+    <span>Already registered? </span>
+    <a @click=${renderLoginPage}>Login</a>
+    </div>
+  <form>`;
+
+  render(accountPage, mainPageElement);
 }
 
 function checkInputValues() {
@@ -103,4 +120,5 @@ function createAccount() {}
 
 renderNavBar();
 renderMainPage();
+renderCreateAccountPage();
 renderLoginPage();
