@@ -49,7 +49,7 @@ function renderLoginPage() {
   const loginPage = html` <form class="form">
     <h2>Login</h2>
     <input type="text" name="email" placeholder="email" />
-    <input type="text" name="password" placeholder="password" />
+    <input type="password" name="password" placeholder="password" />
     <button type="submit" @click=${login}>Login</button>
     <div class="message">
       <span>Not registered?</span>
