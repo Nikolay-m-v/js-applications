@@ -3,6 +3,7 @@
 import { html, render } from "./node_modules/lit-html/lit-html.js";
 
 const headerElement = document.querySelector("header");
+const mainPageElement = document.querySelector("main");
 
 function getSessionToken() {
   return localStorage.getItem("sessionToken");
@@ -34,8 +35,7 @@ function renderNavBar() {
   render(navBar, headerElement);
 }
 
-function renderPage() {
-  const mainPageElement = document.querySelector("main");
+function renderMainPage() {
   const mainPage = html` <div id="mainWrapper">
     <h2>Learn More About Your Favorite Fruits</h2>
     <img src="./images/pexels-pixabay-161559-dImkWBDHz-transformed (1).png"
@@ -43,6 +43,21 @@ function renderPage() {
   </div>`;
 
   render(mainPage, mainPageElement);
+}
+
+function renderLoginPage() {
+  const loginPage = html` <form class="form">
+    <h2>Login</h2>
+    <input type="text" name="username" placeholder="email" />
+    <input type="text" name="password" placeholder="password" />
+    <button type="submit" @click=${login}>Login</button>
+    <div class="message">
+      <span>Not registered?</span>
+      <a @click=${createAccount}>Create an account</a>
+    </div>
+  </form>`;
+
+  render(loginPage, mainPageElement);
 }
 
 async function login() {
@@ -56,5 +71,8 @@ async function login() {
   });
 }
 
+function createAccount() {}
+
 renderNavBar();
-renderPage();
+renderMainPage();
+renderLoginPage();
