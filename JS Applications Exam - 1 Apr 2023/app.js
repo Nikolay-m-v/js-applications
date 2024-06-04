@@ -3,7 +3,15 @@
 import { html, render } from "./node_modules/lit-html/lit-html.js";
 
 const headerElement = document.querySelector("header");
+
+function getSessionToken() {
+  return localStorage.getItem("sessionToken");
+}
+
 function renderNavBar() {
+  const sessionToken = getSessionToken();
+  const isLoggedIn = !!sessionToken;
+
   const navBar = html` <div id="logoContainer">
       <a href="placeholder">
         <img
@@ -14,12 +22,14 @@ function renderNavBar() {
         />
       </a>
     </div>
-    <div id="navigationLinks">
+    <nav id="navigationLinks">
       <a href="placeholder">Fruits</a>
       <a href="placeholder">Search</a>
       <a href="placeholder">Add Fruit</a>
-      <a href="placeholder">Logout</a>
-    </div>`;
+      ${isLoggedIn
+        ? html`<a href="placeholder" @click=${logout}>Logout</a>`
+        : html`<a href="placeholder">Login</a>`}
+    </nav>`;
 
   render(navBar, headerElement);
 }
