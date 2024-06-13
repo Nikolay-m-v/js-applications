@@ -121,5 +121,3 @@ async function login(event) {
 function createAccount() {}
 
 renderNavBar();
-
-// gotta implement createAcc function
