@@ -30,7 +30,7 @@ function renderNavBar() {
       ${isLoggedIn
         ? html`<a href="placeholder" @click=${logout}>Logout</a>`
         : html`<a href="placeholder" @click=${renderLoginPage}>Login</a>`}
-      <a href="placeholder">Register</a>
+      <a href="placeholder" @click=${renderCreateAccountPage}>Register</a>
     </nav>`;
 
   render(navBar, headerElement);
@@ -62,7 +62,8 @@ function renderLoginPage(event) {
   render(loginPage, mainPageElement);
 }
 
-function renderCreateAccountPage() {
+function renderCreateAccountPage(event) {
+  event.preventDefault();
   const accountPage = html`
   <form class="form">
     <h2>Create Account</h2>
