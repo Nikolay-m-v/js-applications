@@ -25,12 +25,12 @@ function renderNavBar() {
       </a>
     </div>
     <nav id="navigationLinks">
-      <a href="placeholder">Fruits</a>
-      <a href="placeholder">Search</a>
+      <a href="#">Fruits</a>
+      <a href="#">Search</a>
       ${isLoggedIn
-        ? html`<a href="placeholder" @click=${logout}>Logout</a>`
-        : html`<a href="placeholder" @click=${renderLoginPage}>Login</a>`}
-      <a href="placeholder" @click=${renderCreateAccountPage}>Register</a>
+        ? html`<a href="#" @click=${logout}>Logout</a>`
+        : html`<a href="#" @click=${renderLoginPage}>Login</a>`}
+      <a href="#" @click=${renderCreateAccountPage}>Register</a>
     </nav>`;
 
   render(navBar, headerElement);
@@ -50,8 +50,8 @@ function renderLoginPage(event) {
   event.preventDefault();
   const loginPage = html` <form class="form" @submit=${login}>
     <h2>Login</h2>
-    <input type="text" name="email" placeholder="email" />
-    <input type="password" name="password" placeholder="password" />
+    <input type="text" name="email" #="email" />
+    <input type="password" name="password" #="password" />
     <button type="submit">Login</button>
     <div class="message">
       <span>Not registered?</span>
@@ -67,9 +67,9 @@ function renderCreateAccountPage(event) {
   const accountPage = html`
   <form class="form" @submit=${createAccount}>
     <h2>Create Account</h2>
-    <input type="text" name="email" placeholder="email"></input>
-    <input type="password" name="password" placeholder="password"></input>
-    <input type="password" name="repeat-password" placeholder="repeat password"></input>
+    <input type="text" name="email" #="email"></input>
+    <input type="password" name="password" #="password"></input>
+    <input type="password" name="repeat-password" #="repeat password"></input>
     <button type"submit">Create Account</button>
     <div class="message">
     <span>Already registered? </span>
@@ -128,7 +128,6 @@ async function login(event) {
 
 async function createAccount(event) {
   event.preventDefault();
-
   const email = document.querySelector(`input[name="email"]`).value;
   const password = document.querySelector(`input[name="password"]`).value;
   const repeatPassword = document.querySelector(
@@ -139,17 +138,14 @@ async function createAccount(event) {
     alert("Passwords do not match");
     return;
   }
-
   const url = "http://localhost:3000/users/register";
-
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify(email, password),
+    body: JSON.stringify({ email, password }),
   });
-
   if (response.ok) {
     const data = await response.json();
     localStorage.setItem("sessionToken", data.accesToken);
