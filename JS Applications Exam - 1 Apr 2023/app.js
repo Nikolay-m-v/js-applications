@@ -36,7 +36,9 @@ function renderNavBar() {
   render(navBar, headerElement);
 }
 
-function renderMainPage() {
+function renderMainPage(event) {
+  event.preventDefault();
+
   const mainPage = html` <div id="mainWrapper">
     <h2>Learn More About Your Favorite Fruits</h2>
     <img src="./images/pexels-pixabay-161559-dImkWBDHz-transformed (1).png"
@@ -48,11 +50,11 @@ function renderMainPage() {
 
 function renderLoginPage(event) {
   event.preventDefault();
-  const loginPage = html` <form class="form">
+  const loginPage = html` <form class="form" @submit=${login}>
     <h2>Login</h2>
     <input type="text" name="email" placeholder="email" />
     <input type="password" name="password" placeholder="password" />
-    <button type="submit" @click=${login}>Login</button>
+    <button type="submit">Login</button>
     <div class="message">
       <span>Not registered?</span>
       <a @click=${renderCreateAccountPage}>Create an account</a>
@@ -98,7 +100,7 @@ async function login(event) {
     return;
   }
 
-  const url = "http://localhost:3000/";
+  const url = "http://localhost:3000/users/login";
 
   const response = await fetch(url, {
     method: "POST",
@@ -113,7 +115,7 @@ async function login(event) {
 
   if (response.ok) {
     const data = await response.json();
-    console.log("login successful");
+    console.log("login successful", data);
     renderMainPage();
   } else {
     console.log("login failed");
