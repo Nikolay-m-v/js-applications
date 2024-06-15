@@ -65,11 +65,11 @@ function renderLoginPage(event) {
 function renderCreateAccountPage(event) {
   event.preventDefault();
   const accountPage = html`
-  <form class="form">
+  <form class="form" @submit=${createAccount}>
     <h2>Create Account</h2>
     <input type="text" name="email" placeholder="email"></input>
     <input type="password" name="password" placeholder="password"></input>
-    <input type="password" name="password" placeholder="repeat password"></input>
+    <input type="password" name="repeat-password" placeholder="repeat password"></input>
     <button type"submit">Create Account</button>
     <div class="message">
     <span>Already registered? </span>
@@ -149,6 +149,24 @@ async function createAccount(event) {
     },
     body: JSON.stringify(email, password),
   });
+
+  if (response.ok) {
+    const data = await response.json();
+    localStorage.setItem("sessionToken", data.accesToken);
+    alert("Account created successfully");
+    renderMainPage();
+  } else {
+    const errorText = await response.text();
+    alert("Registration failed" + errorText);
+  }
+}
+
+function logout(event) {
+  event.preventDefault();
+  localStorage.removeItem("sessionToken");
+  alert("logged out sucessfully");
+  renderNavBar();
+  renderMainPage();
 }
 
 renderNavBar();
