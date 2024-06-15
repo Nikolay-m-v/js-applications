@@ -27,10 +27,10 @@ function renderNavBar() {
     <nav id="navigationLinks">
       <a href="placeholder">Fruits</a>
       <a href="placeholder">Search</a>
-      <a href="placeholder">Add Fruit</a>
       ${isLoggedIn
         ? html`<a href="placeholder" @click=${logout}>Logout</a>`
         : html`<a href="placeholder" @click=${renderLoginPage}>Login</a>`}
+      <a href="placeholder">Register</a>
     </nav>`;
 
   render(navBar, headerElement);
@@ -46,7 +46,8 @@ function renderMainPage() {
   render(mainPage, mainPageElement);
 }
 
-function renderLoginPage() {
+function renderLoginPage(event) {
+  event.preventDefault();
   const loginPage = html` <form class="form">
     <h2>Login</h2>
     <input type="text" name="email" placeholder="email" />
