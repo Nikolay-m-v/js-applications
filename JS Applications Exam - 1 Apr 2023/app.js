@@ -15,7 +15,7 @@ const isLoggedIn = !!sessionToken;
 
 function renderNavBar() {
   const navBar = html` <div id="logoContainer">
-      <a href="main page" @click=${renderMainPage()}>
+      <a href="main page" @click=${renderMainPage}>
         <img
           src="./images/logo.png"
           alt="fruitpedia logo"
@@ -80,23 +80,31 @@ function renderCreateAccountPage(event) {
   render(accountPage, mainPageElement);
 }
 
-function checkInputValues() {
-  const email = document.querySelector('input[name="email"]').value;
-  const password = document.querySelector('input[name="password"]').value;
+// function checkInputValues() {
+//   const email = document.querySelector('input[name="email"]').value;
+//   const password = document.querySelector('input[name="password"]').value;
 
-  if (!email || !password) {
-    alert("fill all fields");
-    return false;
-  }
-  return true;
-}
+//   if (!email || !password) {
+//     alert("fill all fields");
+//     return false;
+//   }
+//   return true;
+// }
 
 async function login(event) {
   event.preventDefault();
 
-  if (!checkInputValues()) {
+  const email = document.querySelector('input[name="email"]').value;
+  const password = document.querySelector('input[name="password"]').value;
+
+  if (!email || !password) {
+    alert("Please fill all fields");
     return;
   }
+
+  // if (!checkInputValues()) {
+  //   return;
+  // }
 
   const url = "http://localhost:3000/users/login";
 
@@ -105,21 +113,43 @@ async function login(event) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email: document.querySelector(`input[name="email"]`).value,
-      password: document.querySelector(`input[name="password"]`).value,
-    }),
+    body: JSON.stringify({ email, password }),
   });
 
   if (response.ok) {
     const data = await response.json();
-    console.log("login successful", data);
+    localStorage.setItem("sessionToken", data.accesToken);
+    alert("Login successful");
     renderMainPage();
   } else {
     console.log("login failed");
   }
 }
 
-function createAccount() {}
+async function createAccount(event) {
+  event.preventDefault();
+
+  const email = document.querySelector(`input[name="email"]`).value;
+  const password = document.querySelector(`input[name="password"]`).value;
+  const repeatPassword = document.querySelector(
+    `input[name="repeat-password"]`
+  ).value;
+
+  if (password !== repeatPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  const url = "http://localhost:3000/users/register";
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(email, password),
+  });
+}
 
 renderNavBar();
+renderMainPage();
