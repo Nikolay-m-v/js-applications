@@ -36,9 +36,7 @@ function renderNavBar() {
   render(navBar, headerElement);
 }
 
-function renderMainPage(event) {
-  event.preventDefault();
-
+function renderMainPage() {
   const mainPage = html` <div id="mainWrapper">
     <h2>Learn More About Your Favorite Fruits</h2>
     <img src="./images/pexels-pixabay-161559-dImkWBDHz-transformed (1).png"
@@ -125,5 +123,3 @@ async function login(event) {
 function createAccount() {}
 
 renderNavBar();
-
-/// sess will
