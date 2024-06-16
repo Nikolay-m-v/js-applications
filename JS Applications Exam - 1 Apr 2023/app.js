@@ -10,10 +10,10 @@ function getSessionToken() {
   return localStorage.getItem("sessionToken");
 }
 
-const sessionToken = getSessionToken();
-const isLoggedIn = !!sessionToken;
-
 function renderNavBar() {
+  const sessionToken = getSessionToken();
+  const isLoggedIn = !!sessionToken;
+
   const navBar = html` <div id="logoContainer">
       <a href="main page" @click=${renderMainPage}>
         <img
@@ -86,23 +86,30 @@ async function login(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
 
-  debugger;
+  const email = formData.get("email");
+  const password = formData.get("password");
 
   const url = "http://localhost:3000/users/login";
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  });
+  let response;
+
+  try {
+    response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
   if (response.ok) {
     const data = await response.json();
-    localStorage.setItem("sessionToken", data.accesToken);
-    alert("Login successful");
+    localStorage.setItem("sessionToken", data.accessToken);
     renderMainPage();
+    renderNavBar();
   } else {
     console.log("login failed");
   }
@@ -110,16 +117,18 @@ async function login(event) {
 
 async function createAccount(event) {
   event.preventDefault();
-  const email = document.querySelector(`input[name="email"]`).value;
-  const password = document.querySelector(`input[name="password"]`).value;
-  const repeatPassword = document.querySelector(
-    `input[name="repeat-password"]`
-  ).value;
+
+  const formData = new FormData(event.target);
+
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const repeatPassword = formData.get("repeat-password");
 
   if (password !== repeatPassword) {
-    alert("Passwords do not match");
+    alert("passwords do not match!");
     return;
   }
+
   const url = "http://localhost:3000/users/register";
   const response = await fetch(url, {
     method: "POST",
@@ -142,7 +151,6 @@ async function createAccount(event) {
 function logout(event) {
   event.preventDefault();
   localStorage.removeItem("sessionToken");
-  alert("logged out sucessfully");
   renderNavBar();
   renderMainPage();
 }
