@@ -27,6 +27,7 @@ function renderNavBar() {
     <nav id="navigationLinks">
       <a href="#">Fruits</a>
       <a href="#">Search</a>
+
       ${isLoggedIn
         ? html`<a href="#" @click=${logout}>Logout</a>`
         : html`<a href="#" @click=${renderLoginPage}>Login</a>`}
@@ -48,10 +49,11 @@ function renderMainPage() {
 
 function renderLoginPage(event) {
   event.preventDefault();
+
   const loginPage = html` <form class="form" @submit=${login}>
     <h2>Login</h2>
-    <input type="text" name="email" #="email" />
-    <input type="password" name="password" #="password" />
+    <input type="text" name="email" id="email" />
+    <input type="password" name="password" id="password" />
     <button type="submit">Login</button>
     <div class="message">
       <span>Not registered?</span>
@@ -80,31 +82,11 @@ function renderCreateAccountPage(event) {
   render(accountPage, mainPageElement);
 }
 
-// function checkInputValues() {
-//   const email = document.querySelector('input[name="email"]').value;
-//   const password = document.querySelector('input[name="password"]').value;
-
-//   if (!email || !password) {
-//     alert("fill all fields");
-//     return false;
-//   }
-//   return true;
-// }
-
 async function login(event) {
   event.preventDefault();
+  const formData = new FormData(event.target);
 
-  const email = document.querySelector('input[name="email"]').value;
-  const password = document.querySelector('input[name="password"]').value;
-
-  if (!email || !password) {
-    alert("Please fill all fields");
-    return;
-  }
-
-  // if (!checkInputValues()) {
-  //   return;
-  // }
+  debugger;
 
   const url = "http://localhost:3000/users/login";
 
