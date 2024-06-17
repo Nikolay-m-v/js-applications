@@ -31,7 +31,9 @@ function renderNavBar() {
       ${isLoggedIn
         ? html`<a href="#" @click=${logout}>Logout</a>`
         : html`<a href="#" @click=${renderLoginPage}>Login</a>`}
-      <a href="#" @click=${renderCreateAccountPage}>Register</a>
+      ${!isLoggedIn
+        ? html`<a href="#" @click=${renderCreateAccountPage}>Register</a>`
+        : html``}
     </nav>`;
 
   render(navBar, headerElement);
@@ -89,7 +91,7 @@ async function login(event) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const url = "http://localhost:3000/users/login";
+  const url = "http://localhost:3030/users/login";
 
   let response;
 
@@ -129,7 +131,7 @@ async function createAccount(event) {
     return;
   }
 
-  const url = "http://localhost:3000/users/register";
+  const url = "http://localhost:3030/users/register";
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -157,3 +159,5 @@ function logout(event) {
 
 renderNavBar();
 renderMainPage();
+
+//working fully as of now
