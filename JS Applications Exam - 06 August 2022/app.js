@@ -50,6 +50,8 @@ function renderStaticHomePage() {
   render(homePage, wrapperElement);
 }
 
+function rednerLoginPage() {}
+
 async function login() {}
 
 async function logout() {}
