@@ -50,7 +50,20 @@ function renderStaticHomePage() {
   render(homePage, wrapperElement);
 }
 
-function rednerLoginPage() {}
+function renderLoginPage(event) {
+  event.preventDefault();
+
+  const loginPage = html`<form class="form" @submit=${login}>
+    <h2>Login</h2>
+    <input type="text" name="email" id="email" />
+    <input type="password" name="password" id="password" />
+    <button type="submit">Login</button>
+    <div class="message">
+      <span>Not registered?</span>
+      <a @click=${renderCreateAccountPage}>Create an account</a>
+    </div>
+  </form> `;
+}
 
 async function login() {}
 
