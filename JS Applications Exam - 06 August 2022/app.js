@@ -40,11 +40,11 @@ function renderStaticHomePage() {
     <img
       src="./images/homepage.png"
       alt="magnified glass looking for a job"
-      width="250px"
-      height="250px"
+      width="400px"
+      height="220px"
     />
-    <h2>Searching for a job?</h2>
-    <h2>The right place for a new career start</h2>
+    <h3>Searching for a job?</h3>
+    <h3>The right place for a new career start</h3>
   </div>`;
 
   render(homePage, wrapperElement);
