@@ -159,6 +159,3 @@ function logout(event) {
 
 renderNavBar();
 renderMainPage();
-
-//working fully as of now
-// william sessions
