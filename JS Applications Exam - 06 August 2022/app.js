@@ -28,8 +28,8 @@ function renderNavBar() {
       <a href="placeholder">Dashboard</a>
       <a href="placeholder">Create Offer</a>
       ${isLoggedIn
-        ? html`<a href="placeholder" @click=${logout}>Logout</a>`
-        : html`<a href="placeholder" @click=${renderLoginPage}>Login</a>`}
+        ? html`<a href="#" @click=${logout}>Logout</a>`
+        : html`<a href="#" @click=${renderLoginPage}>Login</a>`}
     </nav>`;
 
   render(navBar, headerElement);
@@ -63,6 +63,8 @@ function renderLoginPage(event) {
       <a @click=${renderCreateAccountPage}>Create an account</a>
     </div>
   </form> `;
+
+  render(loginPage, wrapperElement);
 }
 
 function logout(event) {
