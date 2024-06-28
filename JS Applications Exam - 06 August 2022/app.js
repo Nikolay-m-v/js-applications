@@ -29,7 +29,7 @@ function renderNavBar() {
       <a href="placeholder">Create Offer</a>
       ${isLoggedIn
         ? html`<a href="placeholder" @click=${logout}>Logout</a>`
-        : html`<a href="placeholder" @click=${login}>Login</a>`}
+        : html`<a href="placeholder" @click=${renderLoginPage}>Login</a>`}
     </nav>`;
 
   render(navBar, headerElement);
@@ -65,9 +65,16 @@ function renderLoginPage(event) {
   </form> `;
 }
 
-async function login() {}
+function logout(event) {
+  event.preventDefault();
+  localStorage.removeItem("sessionToken");
+  renderNavBar();
+  renderStaticHomePage();
+}
 
-async function logout() {}
+function renderCreateAccountPage() {}
+
+async function login() {}
 
 renderNavBar();
 renderStaticHomePage();
