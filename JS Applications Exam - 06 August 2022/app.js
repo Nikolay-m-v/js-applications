@@ -5,6 +5,7 @@ import { html, render } from "./node_modules/lit-html/lit-html.js";
 const headerElement = document.querySelector("header");
 
 function getSessionToken() {
+  console.log(localStorage.getItem("sessionToken"));
   return localStorage.getItem("sessionToken");
 }
 
@@ -23,9 +24,9 @@ function renderNavBar() {
       </a>
     </div>
     <nav id="navigationLinks">
-      <a href="placeholder">Fruits</a>
-      <a href="placeholder">Search</a>
-      <a href="placeholder">Add Fruit</a>
+      <a href="placeholder">Dashboard</a>
+      <a href="placeholder">Create Offer</a>
+      <a href="placeholder">Login</a>
       ${isLoggedIn
         ? html`<a href="placeholder" @click=${logout}>Logout</a>`
         : html`<a href="placeholder" @click=${login}>Login</a>`}
@@ -35,5 +36,7 @@ function renderNavBar() {
 }
 
 async function login() {}
+
+async function logout() {}
 
 renderNavBar();
