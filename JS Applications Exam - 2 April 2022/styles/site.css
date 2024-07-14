@@ -1,5 +1,5 @@
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
@@ -16,7 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
 }
 
@@ -26,8 +26,23 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0px 10px;
-  background-color: #cf3709af;
   max-height: 5rem;
+}
+
+header {
+  background-color: #cf3709af;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#navLinks a {
+  padding: 24px 12px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 nav ul {
