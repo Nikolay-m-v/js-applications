@@ -80,3 +80,5 @@ async function login() {}
 
 renderNavBar();
 renderStaticHomePage();
+
+// fixing and learning
